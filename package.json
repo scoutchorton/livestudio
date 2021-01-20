@@ -1,0 +1,27 @@
+{
+  "name": "livestudio",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./src/LiveStudio.js",
+  "scripts": {
+    "prestart": "npm run sass",
+    "start": "./node_modules/.bin/electron ./src/index.js",
+    "debug": "./node_modules/.bin/electron ./src/index.js --debug",
+    "preinstall": "./node_modules/.bin/electron-rebuild",
+    "sass": "./node_modules/.bin/sass ./static/sass/:./static/styles/ -s compressed --update",
+    "sass-watch": "./node_modules/.bin/sass ./static/sass/:./static/styles/ -s compressed --update --watch"
+  },
+  "author": "scoutchorton",
+  "license": "ISC",
+  "devDependencies": {
+    "electron-rebuild": "^2.3.4",
+    "sass": "^1.26.10"
+  },
+  "dependencies": {
+    "atem-switcher-node": "file:../../C++/ATEMSwitcherNode",
+    "electron": "^11.2.0",
+    "material-design-icons": "^3.0.1",
+    "npm": "^6.14.11",
+    "vue": "^2.6.12"
+  }
+}

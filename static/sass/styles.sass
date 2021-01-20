@@ -1,0 +1,65 @@
+$charcoal: #222222
+$light-charcoal: #737373
+	
+html, body
+	display: flex
+	flex-direction: column
+	width: 100%
+	height: 100%
+	padding: 0
+	margin: 0
+	font-family: "Roboto", Arial, Helvetica, sans-serif
+	user-select: none
+	background: $charcoal
+	
+#statusbar
+	display: flex
+	background: $light-charcoal
+	width: 100%
+
+	flex-direction: row
+	align-items: center
+	justify-content: flex-start
+
+	div
+		display: flex
+		flex-direction: column
+		align-items: center
+		margin: 0.5em
+
+		div
+			display: block
+			border-radius: 50%
+			background: red
+			width: 1em
+			height: 1em
+
+		&.inactive div
+			background: red
+		&.connected div
+			background: lightyellow
+		&.live div
+			background: lightgreen
+
+		img
+			height: 3em
+			width: 3em
+			margin: 0.25em
+
+.gloss_button
+	display: flex
+	align-items: center
+	justify-content: center
+	
+	border: 5px solid #808080
+	border-top-color: #909090
+	border-bottom-color: #707070
+	background: #D8D8D8
+	
+	font-size: 1em
+
+	width: 2.5em
+	height: 2.5em
+
+	&:active
+		background: #B8B8B8
