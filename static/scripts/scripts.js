@@ -22,6 +22,7 @@ document.addEventListener('keyup', e => {
  * Vue components
  * @ignore
  */
+/*
 const Device = {
 	template: document.querySelector('#tmpl-Device').innerHTML,
 	data: () => {
@@ -37,6 +38,7 @@ const Device = {
 		}
 	}
 }
+*/
 const Statusbar = {
 	data: () => {
 		return {

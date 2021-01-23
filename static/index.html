@@ -4,6 +4,7 @@
 		<title>Live Studio</title>
 		<link href="styles/styles.css" type="text/css" rel="stylesheet" />
 		<link href="styles/Panes.css" type="text/css" rel="stylesheet" />
+		<!--https://material.io/resources/icons-->
 		<link href="../node_modules/material-design-icons/iconfont/material-icons.css" type="text/css" rel="stylesheet" />
 		<script src="scripts/Panes.js"></script>
 		<script src="../node_modules/vue/dist/vue.js"></script>
@@ -41,13 +42,10 @@
 				<div v-bind:class="device.stateClass" v-for="device in devices">
 					<img v-bind:src="device.iconURL" />
 					<div></div>
+					<div class="hidden">
+						Context menu
+					</div>
 				</div>
-			</div>
-		</template>
-		<template id="tmpl-Device">
-			<div class="{{ activeClass }}">
-				<img src="{{ iconURL }}">
-				<div></div>
 			</div>
 		</template>
 		<!--
@@ -57,7 +55,7 @@
 			<span id="fadeToBlack" class="gloss_button">FTB</span>
 		</div>
 		-->
-		<template pane-template-id="demo">
+		<template id="tmpl-Demo">
 			<pane>
 				<pane-titlebar>
 					<span>Pane Title</span>

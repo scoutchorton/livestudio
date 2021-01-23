@@ -9,7 +9,7 @@
     "debug": "./node_modules/.bin/electron ./src/index.js --debug",
     "preinstall": "./node_modules/.bin/electron-rebuild",
     "sass": "./node_modules/.bin/sass ./static/sass/:./static/styles/ -s compressed --update",
-    "sass-watch": "./node_modules/.bin/sass ./static/sass/:./static/styles/ -s compressed --update --watch"
+    "sass-watch": "./node_modules/.bin/sass ./static/sass/:./static/styles/ -s compressed --update --watch --poll"
   },
   "author": "scoutchorton",
   "license": "ISC",
