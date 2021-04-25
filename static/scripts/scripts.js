@@ -75,9 +75,17 @@ var statusbar = new Vue({
 	},
 	methods: {
 		setState: (name, state) => {
-			console.log(this.devices)
-			for(let device in this.devices) {
-				console.log(device)
+			console.log(statusbar.devices);
+			for(let device of statusbar.devices) {
+				console.log(device);
+			}
+		},
+		toggleContentMenu: (name) => {
+			for(let device of statusbar.devices) {
+				if(device.name === name)
+					device.contextMenu = (device.contextMenu) ? false : true;
+				else
+					device.contextMenu = false;
 			}
 		}
 	}
@@ -86,14 +94,73 @@ var statusbar = new Vue({
 statusbar.devices.push({
 	name: "switcher",
 	iconURL: "assets/atem_switcher.svg",
-	state: 0
+	state: 0,
+	contextMenu: false,
+	menu: [
+		{
+			name: "Setup",
+			type: "button",
+			callback: () => {
+				alert('Hello world!');
+			}
+		}, {
+			type: 'spacer'
+		}, {
+			name: "Mixer Panel",
+			type: 'button',
+			callback: () => {
+				alert('Opening Mixer Panel...');
+			}
+		}
+	]
+});
+statusbar.devices.push({
+	name: "Side Camera",
+	iconURL: "assets/ptz_camera.svg",
+	state: 0,
+	contextMenu: false,
+	menu: [
+		{
+			name: "Connect",
+			type: "button",
+			callback: () => {
+				alert('Connecting to camera...');
+			}
+		}, {
+			name: "Movement",
+			type: 'button',
+			callback: () => {
+				alert('Control the camera position');
+			}
+		}, {
+			type: 'spacer'
+		}, {
+			name: "Settings",
+			type: 'button',
+			callback: () => {
+				alert('Opening settings Panel...');
+			}
+		}
+	]
 });
 statusbar.setState('switcher', 2);
+//statusbar.toggleContentMenu('switcher');
 
-/**
- * Misc
- * @ignore
- */
+document.body.addEventListener('click', (e) => {
+	statusbar.toggleContentMenu();
+});
+document.body.addEventListener('keyup', (e) => {
+	if(e.key === 'Escape')
+		statusbar.toggleContentMenu();
+});
+
+switcherControls = new Pane({
+	template: document.getElementById('tmpl-Pane').innerHTML,
+	name: 'Switcher Controls'
+});
+switcherControls.vm.x = 100;
+switcherControls.vm.y = 100;
+
 /*
 function timedReload(time) {
 	console.log(`Reload at ${new Date(Date.now() + time).toLocaleTimeString()}`)
@@ -101,26 +168,5 @@ function timedReload(time) {
 		window.location.reload();
 	}, time);
 }
+timedReload(2500);
 */
-
-//timedReload(2500);
-
-//console.log(ipcRenderer.send('startup'));
-
-/*
-document.getElementById('auto').addEventListener('click', e => {
-	ipcRenderer.send('button', 'auto');
-});
-document.getElementById('cut').addEventListener('click', e => {
-	ipcRenderer.send('button', 'cut');
-});
-document.getElementById('fadeToBlack').addEventListener('click', e => {
-	ipcRenderer.send('button', 'fadeToBlack');
-});
-*/
-
-/*
-let demoPane = new Pane('demo');
-demoPane.attach();
-*/
-

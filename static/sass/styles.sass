@@ -21,8 +21,10 @@ html, body
 	align-items: center
 	justify-content: flex-start
 
+	$iconsize: 3em
+
 	/* Device */
-	div
+	& > div
 		position: relative
 		display: flex
 		flex-direction: column
@@ -31,12 +33,12 @@ html, body
 
 		/* Device icon */
 		img
-			height: 3em
-			width: 3em
+			height: $iconsize
+			width: $iconsize
 			margin: 0.25em
 
 		/* Status icon */
-		div:nth-child(2)
+		div
 			display: block
 			border-radius: 50%
 			background: red
@@ -51,10 +53,22 @@ html, body
 			background: lightgreen
 		
 		/* Context menu */
-		div:nth-child(3)
+		ul
 			position: absolute
+			background: white
+			top: $iconsize + (0.25em * 2) + (1em) + (0.5em)
+			list-style: none
+			padding-inline-start: 0
+			margin: 0
+			mix-width: 1em
+
 			&.hidden
 				display: none
+			
+			& li
+				padding: 0 0.1em
+			& li:hover
+				background: lightgrey
 
 .gloss_button
 	display: flex

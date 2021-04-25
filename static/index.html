@@ -2,49 +2,29 @@
 <html>
 	<head>
 		<title>Live Studio</title>
+		
 		<link href="styles/styles.css" type="text/css" rel="stylesheet" />
-		<link href="styles/Panes.css" type="text/css" rel="stylesheet" />
-		<!--https://material.io/resources/icons-->
+		<link href="styles/panekit.css" type="text/css" rel="stylesheet" />
 		<link href="../node_modules/material-design-icons/iconfont/material-icons.css" type="text/css" rel="stylesheet" />
-		<script src="scripts/Panes.js"></script>
+
+		<script src="scripts/panekit.js"></script>
 		<script src="../node_modules/vue/dist/vue.js"></script>
+		
 		<!--<meta http-equiv="Content-Security-Policy" content="default-src 'self'">-->
 	</head>
 	<body>
-		<div id="statusbar">
-		</div>
-		<!--
-		<div id="statusbar">
-			<div class="" v-for="device in devices">
-				<img src="{{ device.iconURL }}" />
-				<div></div>
-			</div>
-		</div>
-		-->
-		<!--
-		<div id="statusbar">
-			<div class="active">
-				<img src="assets/atem_switcher.svg">
-				<div></div>
-			</div>
-			<div class="active">
-				<img src="assets/ptz_camera.svg">
-				<div></div>
-			</div>
-			<div class="active">
-				<img src="assets/ptz_camera.svg">
-				<div></div>
-			</div>
-		</div>
-		-->
+		<div id="statusbar"></div>
 		<template id="tmpl-Statusbar">
 			<div id="statusbar">
-				<div v-bind:class="device.stateClass" v-for="device in devices">
+				<div v-for="device in devices" v-bind:class="device.stateClass" v-bind:name="device.name" v-on:click.right="device.contextMenu = (device.contextMenu) ? false : true">
 					<img v-bind:src="device.iconURL" />
 					<div></div>
-					<div class="hidden">
-						Context menu
-					</div>
+					<ul v-bind:class="(device.contextMenu) ? '' : 'hidden'">
+						<li v-for="item in device.menu">
+							<span v-if="item.type === 'button'" v-on:click="item.callback">{{ item.name }}</span>
+							<hr v-else-if="item.type === 'spacer'"/>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</template>
@@ -55,12 +35,18 @@
 			<span id="fadeToBlack" class="gloss_button">FTB</span>
 		</div>
 		-->
-		<template id="tmpl-Demo">
-			<pane>
-				<pane-titlebar>
-					<span>Pane Title</span>
-				</pane-titlebar>
-			</pane>
+		<template id="tmpl-Pane">
+			<div class="pane" v-bind:class="{minimized: minimized, focused: focused}" v-bind:style="{left: x + 'px', top: y + 'px'}">
+				<div id="titlebar" draggable v-on:dragend="__dragend_handler" v-on:dragstart="__dragstart_handler">
+					<span>{{ name }}</span>
+					<span id="titlebar-actions">
+						<span class="material-icons" v-if="!minimized" v-on:click.left="minimized = true">arrow_drop_down</span>
+						<span class="material-icons" v-if="minimized" v-on:click.left="minimized = false">arrow_drop_up</span>
+						<span class="material-icons" v-on:click.left="close">close</span>
+					</span>
+				</div>
+				<div id="content"></div>
+			</div>
 		</template>
 		<script src="scripts/scripts.js"></script>
 	</body>

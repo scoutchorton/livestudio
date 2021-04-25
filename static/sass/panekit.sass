@@ -1,0 +1,59 @@
+.pane
+	$titlebar-size: 1.5em
+
+	position: absolute
+	display: flex
+	flex-direction: column
+	background: lightgrey
+	min-width: 200px
+
+	top: 100px
+	left: 100px
+
+	z-index: 1
+	
+	&.minimized
+		top: calc(100% - #{$titlebar-size}) !important
+		
+		#content
+			display: none
+
+	&.focused
+		z-index: 10
+
+		#titlebar
+			background: white
+
+	#titlebar
+		display: flex
+		flex-direction: row
+		background: lightgrey
+		align-items: center
+		justify-content: space-between
+
+		& > *
+			padding: 0 0.25em
+		& > #titlebar-actions
+			padding: 0
+			display: flex
+			flex-direction: row
+			align-items: center
+			justify-content: flex-end
+
+			& > .material-icons
+				background: inherit
+				color: black
+				transition: background 0.25s, color 0.25s
+				font-size: $titlebar-size
+			& > .material-icons:hover
+				background: #7f7f7f
+				color: white
+				transition: background 0.25s, color 0.25s
+			& > .material-icons:active
+				background: #3f3f3f
+				color: white
+				filter: invert(75%)
+				transition: background 0.25s, color 0.25s
+	
+	#content
+		height: 1em
