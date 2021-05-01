@@ -13,18 +13,37 @@ class Pane {
 	 * New window on screen
 	 */
 	constructor(settings) {
+		//Create blank settings to avoid errors
+		settings = settings || {};
+
 		//Create pane element if not existant
 		if(settings.id === undefined) {
 			let temp = document.createElement('div');
 			document.body.appendChild(temp);
-
-			settings.id = `pane-${new Date().getTime()}`;
-			temp.id = settings.id;
+			temp.id = `pane-${new Date().getTime()}`;
+			settings.id = temp.id;
 		}
 
 		//Add default template if none given
 		if(settings.template === undefined)
 			settings.template = '';
+		
+		//Add content based on type
+		/*
+		try {
+			console.log(typeof(settings.content), settings.content.__proto__, settings.content.constructor);
+		} catch {}
+		*/
+		if(settings.content === undefined)
+			settings.content = '';
+		else if(settings.content.constructor == String)
+			settings.content = settings.content;
+		else if(settings.content instanceof HTMLTemplateElement)
+		settings.content = settings.content.cloneNode(true).firstElementChild.outerHTML;
+		else if(settings.content instanceof HTMLElement)
+			settings.content = settings.content.outerHTML;
+		else
+			settings.content = '';
 
 		//Initalize Vue instance
 		this.vm = new Vue({
@@ -33,6 +52,7 @@ class Pane {
 			data: () => {
 				return {
 					name: settings.name || 'PaneKit',
+					content: settings.content,
 					minimized: false,
 					focused: true,
 					x: 0,
@@ -49,11 +69,17 @@ class Pane {
 				},
 				__dragend_handler: (e) => {
 					this.vm.$set(this.vm.$data, "x", e.clientX - this.vm.$data.__offsets.x);
-					this.vm.$set(this.vm.$data, "y", e.clientY - this.vm.$data.__offsets.y);
+					if(!this.vm.$data.minimized)
+						this.vm.$set(this.vm.$data, "y", e.clientY - this.vm.$data.__offsets.y);
+					console.log(this.vm.$data.x, this.vm.$data.y);
 				},
 				__dragstart_handler: (e) => {
 					this.vm.$set(this.vm.$data.__offsets, "x", e.clientX - this.vm.$data.x);
-					this.vm.$set(this.vm.$data.__offsets, "y", e.clientY - this.vm.$data.y);
+					if(!this.vm.$data.minimized)
+						this.vm.$set(this.vm.$data.__offsets, "y", e.clientY - this.vm.$data.y);
+					else
+						this.vm.$set(this.vm.$data.__offsets, "y", 0);
+					console.log(this.vm.$data.x, this.vm.$data.y);
 				}
 			}
 		});
@@ -61,7 +87,6 @@ class Pane {
 		//Add listeners for pane
 		this.vm.$el.addEventListener('drag', (e) => {
 			//console.log('Dragged', e);
-			
 		});
 	}
 }

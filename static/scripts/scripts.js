@@ -160,13 +160,3 @@ switcherControls = new Pane({
 });
 switcherControls.vm.x = 100;
 switcherControls.vm.y = 100;
-
-/*
-function timedReload(time) {
-	console.log(`Reload at ${new Date(Date.now() + time).toLocaleTimeString()}`)
-	reloadInterval = setTimeout(() => {
-		window.location.reload();
-	}, time);
-}
-timedReload(2500);
-*/

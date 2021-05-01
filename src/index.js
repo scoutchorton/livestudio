@@ -2,9 +2,26 @@ const fs = require('fs');
 const sass = require('sass');
 const { app, BrowserWindow, globalShortcut, ipcMain, dialog } = require('electron');
 const ATEMSwitcher = require('atem-switcher-node');
+const { exit } = require('process');
 let switcher;
 
 
+
+
+
+//console.log(require.main);
+//console.log(require.main.exports);
+//console.log(Object.keys(require.cache));
+/*
+require.main.children.forEach((child) => {
+	console.log("Child module id: ", child.id);
+});
+*/
+/*
+require.cache.values().forEach((child) => {
+	console.log("Child module id: ", child.id);
+});
+*/
 
 /**
  * Electron

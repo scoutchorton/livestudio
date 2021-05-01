@@ -30,7 +30,10 @@
 		background: lightgrey
 		align-items: center
 		justify-content: space-between
+		cursor: grab
 
+		&:active
+			cursor: grabbing
 		& > *
 			padding: 0 0.25em
 		& > #titlebar-actions
@@ -56,4 +59,4 @@
 				transition: background 0.25s, color 0.25s
 	
 	#content
-		height: 1em
+		min-height: 1em

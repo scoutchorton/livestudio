@@ -14,6 +14,7 @@
 	</head>
 	<body>
 		<div id="statusbar"></div>
+		
 		<template id="tmpl-Statusbar">
 			<div id="statusbar">
 				<div v-for="device in devices" v-bind:class="device.stateClass" v-bind:name="device.name" v-on:click.right="device.contextMenu = (device.contextMenu) ? false : true">
@@ -28,13 +29,15 @@
 				</div>
 			</div>
 		</template>
+
 		<!--
-		<div id="buttons_demo">
-			<span id="auto" class="gloss_button">AUTO</span>
-			<span id="cut" class="gloss_button">CUT</span>
-			<span id="fadeToBlack" class="gloss_button">FTB</span>
-		</div>
+			<div id="buttons_demo">
+				<span id="auto" class="gloss_button">AUTO</span>
+				<span id="cut" class="gloss_button">CUT</span>
+				<span id="fadeToBlack" class="gloss_button">FTB</span>
+			</div>
 		-->
+		
 		<template id="tmpl-Pane">
 			<div class="pane" v-bind:class="{minimized: minimized, focused: focused}" v-bind:style="{left: x + 'px', top: y + 'px'}">
 				<div id="titlebar" draggable v-on:dragend="__dragend_handler" v-on:dragstart="__dragstart_handler">
@@ -45,9 +48,11 @@
 						<span class="material-icons" v-on:click.left="close">close</span>
 					</span>
 				</div>
-				<div id="content"></div>
+				<div id="content" v-html="content"></div>
 			</div>
 		</template>
+
 		<script src="scripts/scripts.js"></script>
+		<script src="scripts/startup.js"></script>
 	</body>
-</html>
+	</html>
