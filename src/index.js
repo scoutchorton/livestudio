@@ -1,9 +1,7 @@
 const fs = require('fs');
 const sass = require('sass');
 const { app, BrowserWindow, globalShortcut, ipcMain, dialog } = require('electron');
-const ATEMSwitcher = require('atem-switcher-node');
 const { exit } = require('process');
-let switcher;
 
 
 
