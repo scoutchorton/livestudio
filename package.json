@@ -16,11 +16,11 @@
   "author": "scoutchorton",
   "license": "ISC",
   "devDependencies": {
-    "electron-rebuild": "^2.3.5",
-    "sass": "^1.32.12"
+    "atem-switcher-node": "git+https://github.com/scoutchorton/ATEMSwitcherNode.git",
   },
   "dependencies": {
-    "atem-switcher-node": "git+https://github.com/scoutchorton/ATEMSwitcherNode.git",
+    "electron-rebuild": "^2.3.5",
+    "sass": "^1.32.12",
     "electron": "^11.4.4",
     "material-design-icons": "^3.0.1",
     "npm": "^6.14.13",
