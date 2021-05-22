@@ -108,8 +108,8 @@ switcherControls = new Pane({
 	template: document.getElementById('tmpl-Pane').innerHTML,
 	name: 'Switcher Controls'
 });
-switcherControls.vm.x = 100;
-switcherControls.vm.y = 100;
+switcherControls.vm.x = 300;
+switcherControls.vm.y = 300;
 
 //Load modules n stuff
-livestudio.loadModules();
+livestudio.initModules();

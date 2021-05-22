@@ -10,17 +10,20 @@
 		"postinstall": "npm run sass && electron-rebuild",
 		"build": "electron-rebuild",
 		"sass": "sass ./static/sass/:./static/styles/ -s compressed --update",
-		"sass-watch": "sass ./static/sass/:./static/styles/ -s compressed --update --watch --poll"
+		"sass-watch": "sass ./static/sass/:./static/styles/ -s compressed --update --watch --poll",
+		"docs": "jsdoc -R .\\README.md -d .\\docs\\ .\\src\\"
 	},
 	"author": "scoutchorton",
 	"license": "ISC",
 	"dependencies": {
-		"demolivestudiomodule": "github:scoutchorton/demolivestudiomodule",
 		"electron": "^11.4.4",
 		"electron-rebuild": "^2.3.5",
 		"material-design-icons": "^3.0.1",
 		"npm": "^7.11.2",
 		"sass": "^1.32.12",
 		"vue": "^2.6.12"
+	},
+	"devDependencies": {
+		"demolivestudiomodule": "file:../DemoLiveStudioModule"
 	}
 }

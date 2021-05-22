@@ -15,8 +15,7 @@ function createWindow() {
 			nodeIntegration: true,
 			devTools: true
 		},
-		center: true,
-		fullscreen: true
+		center: true
 	});
 
 	//Setup window
