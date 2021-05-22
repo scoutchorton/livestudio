@@ -29,11 +29,6 @@ class Pane {
 			settings.template = '';
 		
 		//Add content based on type
-		/*
-		try {
-			console.log(typeof(settings.content), settings.content.__proto__, settings.content.constructor);
-		} catch {}
-		*/
 		if(settings.content === undefined)
 			settings.content = '';
 		else if(settings.content.constructor == String)
@@ -67,26 +62,25 @@ class Pane {
 					this.vm.$el.remove();
 					this.vm.$destroy();
 				},
-				__dragend_handler: (e) => {
-					this.vm.$set(this.vm.$data, "x", e.clientX - this.vm.$data.__offsets.x);
-					if(!this.vm.$data.minimized)
-						this.vm.$set(this.vm.$data, "y", e.clientY - this.vm.$data.__offsets.y);
-					console.log(this.vm.$data.x, this.vm.$data.y);
-				},
+				//Handle when the titlebar is dragged
 				__dragstart_handler: (e) => {
 					this.vm.$set(this.vm.$data.__offsets, "x", e.clientX - this.vm.$data.x);
+
 					if(!this.vm.$data.minimized)
 						this.vm.$set(this.vm.$data.__offsets, "y", e.clientY - this.vm.$data.y);
 					else
 						this.vm.$set(this.vm.$data.__offsets, "y", 0);
-					console.log(this.vm.$data.x, this.vm.$data.y);
+				},
+				//Handle when the titlebar is dropped
+				__dragend_handler: (e) => {
+					this.vm.$set(this.vm.$data, "x", e.clientX - this.vm.$data.__offsets.x);
+					
+					if(!this.vm.$data.minimized)
+						this.vm.$set(this.vm.$data, "y", e.clientY - this.vm.$data.__offsets.y);
 				}
 			}
 		});
 
 		//Add listeners for pane
-		this.vm.$el.addEventListener('drag', (e) => {
-			//console.log('Dragged', e);
-		});
 	}
 }

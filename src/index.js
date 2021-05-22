@@ -1,23 +1,6 @@
 const fs = require('fs');
-//const sass = require('sass');
 const { app, BrowserWindow, globalShortcut, ipcMain, dialog } = require('electron');
-const { exit } = require('process');
-const npm = require('npm');
 
-
-
-
-
-console.dir(require.cache, {depth: 0});
-
-//console.dir(npm);
-/*
-npm.load((newnpm) => {
-	npm.run('sass');
-	exit();
-});
-*/
-exit();
 
 /**
  * Electron
@@ -45,8 +28,6 @@ function createWindow() {
 		win.webContents.openDevTools();
 }
 
-/*
-
 //Launch application once loaded
 app.whenReady().then(createWindow).catch(err => {
 	app.quit();
@@ -73,5 +54,3 @@ ipcMain.on('button', (e, arg) => {
 	else if(arg === 'fadeToBlack')
 		switcher.fadeToBlack();
 });
-
-*/

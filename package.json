@@ -5,10 +5,9 @@
 	"main": "./src/LiveStudio.js",
 	"bin": "./src/index.js",
 	"scripts": {
-		"prestart": "npm run sass",
 		"start": "electron ./src/index.js",
 		"debug": "electron ./src/index.js --debug",
-		"postinstall": "electron-rebuild",
+		"postinstall": "npm run sass && electron-rebuild",
 		"build": "electron-rebuild",
 		"sass": "sass ./static/sass/:./static/styles/ -s compressed --update",
 		"sass-watch": "sass ./static/sass/:./static/styles/ -s compressed --update --watch --poll"
@@ -16,7 +15,6 @@
 	"author": "scoutchorton",
 	"license": "ISC",
 	"dependencies": {
-		"demolivestudiomodule": "github:scoutchorton/demolivestudiomodule",
 		"electron": "^11.4.4",
 		"electron-rebuild": "^2.3.5",
 		"material-design-icons": "^3.0.1",

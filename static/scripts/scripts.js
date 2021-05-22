@@ -1,5 +1,4 @@
 const { ipcRenderer } = require('electron');
-//var Statusbar = require('./components/Statusbar.vue');
 
 /**
  * Key handling
