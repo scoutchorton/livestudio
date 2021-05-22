@@ -3,41 +3,61 @@
 	<head>
 		<title>Live Studio</title>
 		
+		<!------------>
+		<!-- Styles -->
+		<!------------>
+
 		<link href="styles/styles.css" type="text/css" rel="stylesheet" />
 		<link href="styles/panekit.css" type="text/css" rel="stylesheet" />
 		<link href="../node_modules/material-design-icons/iconfont/material-icons.css" type="text/css" rel="stylesheet" />
 
+		<!------------->
+		<!-- Scripts -->
+		<!------------->
+
 		<script src="scripts/panekit.js"></script>
+		<script src="../src/LiveStudio.js"></script>
 		<script src="../node_modules/vue/dist/vue.js"></script>
+
+		<!-------------->
+		<!-- Metadata -->
+		<!-------------->
 		
 		<!--<meta http-equiv="Content-Security-Policy" content="default-src 'self'">-->
 	</head>
 	<body>
+
+		<!--------------->
+		<!-- Page data -->
+		<!--------------->
+
 		<div id="statusbar"></div>
+
+		<!--
+		<div id="buttons_demo">
+			<span id="auto" class="gloss_button">AUTO</span>
+			<span id="cut" class="gloss_button">CUT</span>
+			<span id="fadeToBlack" class="gloss_button">FTB</span>
+		</div>
+		-->
 		
+		<!--------------->
+		<!-- Templates -->
+		<!--------------->
+
 		<template id="tmpl-Statusbar">
 			<div id="statusbar">
-				<div v-for="device in devices" v-bind:class="device.stateClass" v-bind:name="device.name" v-on:click.right="device.contextMenu = (device.contextMenu) ? false : true">
+				<div v-for="device in devices" v-bind:class="device.stateClass" v-bind:name="device.name" v-on:click.right="contextMenu = devices.indexOf(device)">
 					<img v-bind:src="device.iconURL" />
 					<div></div>
-					<ul v-bind:class="(device.contextMenu) ? '' : 'hidden'">
-						<li v-for="item in device.menu">
+					<ul v-bind:class="(contextMenu === devices.indexOf(device)) ? '' : 'hidden'">
+						<li v-for="item in device.menu" v-bind:class="item.type">
 							<span v-if="item.type === 'button'" v-on:click="item.callback">{{ item.name }}</span>
-							<hr v-else-if="item.type === 'spacer'"/>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</template>
-
-		<!--
-			<div id="buttons_demo">
-				<span id="auto" class="gloss_button">AUTO</span>
-				<span id="cut" class="gloss_button">CUT</span>
-				<span id="fadeToBlack" class="gloss_button">FTB</span>
-			</div>
-		-->
-		
 		<template id="tmpl-Pane">
 			<div class="pane" v-bind:class="{minimized: minimized, focused: focused}" v-bind:style="{left: x + 'px', top: y + 'px'}">
 				<div id="titlebar" draggable v-on:dragend="__dragend_handler" v-on:dragstart="__dragstart_handler">
@@ -52,7 +72,11 @@
 			</div>
 		</template>
 
-		<script src="scripts/scripts.js"></script>
+		<!------------->
+		<!-- Scripts -->
+		<!------------->
+
 		<script src="scripts/startup.js"></script>
+		<script src="scripts/scripts.js"></script>
 	</body>
 	</html>

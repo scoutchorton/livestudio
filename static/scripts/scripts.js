@@ -1,4 +1,5 @@
 const { ipcRenderer } = require('electron');
+const livestudio = require('../src/LiveStudio.js');
 
 /**
  * Key handling
@@ -12,56 +13,9 @@ document.addEventListener('keyup', e => {
 			window.close();
 	} else if(e.code === 'F5') {
 		e.preventDefault();
-		ipcRenderer.send('compileSass');
 		window.location.reload();
 	}
 });
-
-/**
- * Vue components
- * @ignore
- */
-/*
-const Device = {
-	template: document.querySelector('#tmpl-Device').innerHTML,
-	data: () => {
-		return {
-			activeClass: '',
-			iconURL: '',
-			name: ''
-		};
-	},
-	methods: {
-		active: (status) => {
-			this.activeClass = (status) ? 'active' : '';
-		}
-	}
-}
-*/
-const Statusbar = {
-	data: () => {
-		return {
-			devices: []
-		};
-	},
-	methods: {
-		addDevice: (name, iconURL) => {
-			/*
-			this.devices[name] = new Vue({
-				el: '#statusbar',
-				components: Device,
-				data: () => {
-					return {
-						activeClass: '',
-						iconURL: iconURL,
-						name: name
-					}
-				}
-			});
-			*/
-		}
-	}
-}
 
 /**
  * Vue
@@ -70,7 +24,10 @@ var statusbar = new Vue({
 	el: '#statusbar',
 	template: document.getElementById('tmpl-Statusbar').innerHTML,
 	data: () => {
-		return {devices: []};
+		return {
+			devices: [],
+			contextMenu: -1
+		};
 	},
 	methods: {
 		setState: (name, state) => {
@@ -79,13 +36,8 @@ var statusbar = new Vue({
 				console.log(device);
 			}
 		},
-		toggleContentMenu: (name) => {
-			for(let device of statusbar.devices) {
-				if(device.name === name)
-					device.contextMenu = (device.contextMenu) ? false : true;
-				else
-					device.contextMenu = false;
-			}
+		toggleContentMenu: () => {
+			statusbar.$set(statusbar.$data, 'contextMenu', -1);
 		}
 	}
 });
@@ -143,7 +95,6 @@ statusbar.devices.push({
 	]
 });
 statusbar.setState('switcher', 2);
-//statusbar.toggleContentMenu('switcher');
 
 document.body.addEventListener('click', (e) => {
 	statusbar.toggleContentMenu();
@@ -159,3 +110,6 @@ switcherControls = new Pane({
 });
 switcherControls.vm.x = 100;
 switcherControls.vm.y = 100;
+
+//Load modules n stuff
+livestudio.loadModules();
