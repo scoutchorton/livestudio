@@ -1,5 +1,5 @@
 const { ipcRenderer } = require('electron');
-const livestudio = require('../src/LiveStudio.js');
+//const livestudio = require('../src/LiveStudio.js');
 
 /**
  * Key handling
@@ -38,15 +38,29 @@ var statusbar = new Vue({
 		},
 		toggleContentMenu: () => {
 			statusbar.$set(statusbar.$data, 'contextMenu', -1);
+		},
+		addDevice: (settings) => {
+			//Check for required values
+			if(settings.name === undefined || settings.name == "")
+				return false;
+			else if(settings.iconURL === undefined || settings.iconURL == "")
+				return false;
+
+			//Set default values
+			settings.state = settings.state || 0;
+			settings.menu = settings.menu || [];
+
+			statusbar.$set(statusbar.$data.devices, statusbar.$data.devices.length, settings);
+
+			return true;
 		}
 	}
 });
 
-statusbar.devices.push({
+statusbar.addDevice({
 	name: "switcher",
 	iconURL: "assets/atem_switcher.svg",
 	state: 0,
-	contextMenu: false,
 	menu: [
 		{
 			name: "Setup",
@@ -65,11 +79,10 @@ statusbar.devices.push({
 		}
 	]
 });
-statusbar.devices.push({
+statusbar.addDevice({
 	name: "Side Camera",
 	iconURL: "assets/ptz_camera.svg",
 	state: 0,
-	contextMenu: false,
 	menu: [
 		{
 			name: "Connect",
@@ -110,6 +123,3 @@ switcherControls = new Pane({
 });
 switcherControls.vm.x = 300;
 switcherControls.vm.y = 300;
-
-//Load modules n stuff
-livestudio.initModules();

@@ -1,1 +1,1 @@
-# LiveStudio
+# ![LiveStudio](./static/assets/logo-256.png)

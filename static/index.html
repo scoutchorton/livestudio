@@ -16,8 +16,9 @@
 		<!------------->
 
 		<script src="scripts/panekit.js"></script>
-		<script src="../src/LiveStudio.js"></script>
 		<script src="../node_modules/vue/dist/vue.js"></script>
+		<script>
+		</script>
 
 		<!-------------->
 		<!-- Metadata -->
@@ -26,6 +27,15 @@
 		<!--<meta http-equiv="Content-Security-Policy" content="default-src 'self'">-->
 	</head>
 	<body>
+		
+		<!-------------------->
+		<!-- Loading screen -->
+		<!-------------------->
+
+		<div id="preload">
+			<img src="assets/logo.svg" class="logo" />
+			<img src="assets/loading.svg" />
+		</div>
 
 		<!--------------->
 		<!-- Page data -->
@@ -47,7 +57,7 @@
 
 		<template id="tmpl-Statusbar">
 			<div id="statusbar">
-				<div v-for="device in devices" v-bind:class="device.stateClass" v-bind:name="device.name" v-on:click.right="contextMenu = devices.indexOf(device)">
+				<div v-for="device in devices" v-bind:class="device.stateClass" v-bind:name="device.name" v-on:click.right="contextMenu = (contextMenu == -1) ? devices.indexOf(device) : -1">
 					<img v-bind:src="device.iconURL" />
 					<div></div>
 					<ul v-bind:class="(contextMenu === devices.indexOf(device)) ? '' : 'hidden'">

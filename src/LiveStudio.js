@@ -6,7 +6,6 @@
  * @module livestudio
  */
 const fs = require('fs');
-const { tmp } = require('npm');
 const npm = require('npm');
 const path = require('path');
 const packagelock = require('../package-lock.json');
@@ -15,15 +14,16 @@ const packagelock = require('../package-lock.json');
  * Cache to store module data
  * @property moduleCache
  */
-module.exports.moduleCache = {};
+var moduleCache = {};
 
 /**
  * Find and initalize modules
  * @method
+ * @async
  * 
  * @returns {Boolean}
  */
-module.exports.initModules = () => {
+async function initModules() {
 	//Grab package directory listing
 	let baseDir = npm.config.cwd;
 	let packageDirs = Object.keys(packagelock.packages);
@@ -41,9 +41,10 @@ module.exports.initModules = () => {
 		}
 
 		//Check that module is a livestudio module and load module
-		console.log(tmpPackage.name);
-		if(tmpPackage.livestudio)
-			this.loadModule(dataPath);
+		if(tmpPackage.livestudio) {
+			console.log(tmpPackage.name);
+			await this.loadModule(dataPath);
+		}
 			
 		//console.log(JSON.stringify(tmpPackage));
 
@@ -58,10 +59,13 @@ module.exports.initModules = () => {
 /**
  * Load a module from a path
  * @method
+ * @async
  * 
  * @return {Boolean}
  */
-module.exports.loadModule = (path) => {
+async function loadModule(path) {
+	console.log(`Loading a package at ${path}`);
+
 	//Attempt to open package data
 	let tmpPackage;
 	try {
@@ -73,4 +77,20 @@ module.exports.loadModule = (path) => {
 	//Validate package
 	if(tmpPackage.main === undefined)
 		return false;
+	else if(tmpPackage.livestudio === undefined || tmpPackage.livestudio == false)
+		return false;
+	
+	console.log(`Loaded ${tmpPackage.name}`);
 };
+
+/**
+ * Exports
+ */
+module.exports = {
+	//Properties
+	moduleCache: moduleCache,
+
+	//Methods
+	initModules: initModules,
+	loadModule: loadModule
+}

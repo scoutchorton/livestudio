@@ -1,52 +1,108 @@
 $charcoal: #222222
 $light-charcoal: #737373
 
+/* Animations
+
+@keyframes loading
+	0%
+		transform: rotate(0deg)
+	50%
+		transform: rotate(180deg)
+	100%
+		transform: rotate(360deg)
+
+/* Global attributes
+	
 html, body
 	display: flex
-	flex-direction: column
-	width: 100%
 	height: 100%
-	padding: 0
 	margin: 0
+	padding: 0
+	width: 100%
+
+	flex-direction: column
+	
+	background: $charcoal
 	font-family: "Roboto", Arial, Helvetica, sans-serif
 	user-select: none
-	background: $charcoal
-	
-#statusbar
+
+/* Specific attributes
+
+#preload
 	display: flex
-	background: $light-charcoal
+	height: 100%
+	position: absolute
+	visibility: visible
+	width: 100%
+	z-index: 100
+
+	align-items: center
+	flex-direction: column
+	justify-content: center
+
+	background: $charcoal
+	color: $light-charcoal
+
+	transition: opacity 2s linear 0s, visibility 0s linear 2s
+
+	/* Logo and loading spiral */
+	img
+		height: 2.5em
+		margin: 1em
+		padding: 0.5em
+
+		background: $light-charcoal
+
+	/* Just loading spiral */
+	img:not(.logo)
+		border-radius: 50%
+		animation: loading 1s linear 0s infinite reverse none
+	
+	&.hidden
+		opacity: 0
+		visibility: hidden
+
+		transition: opacity 2.5s linear 0s, visibility 0s linear 2.5s
+
+#statusbar
+	$iconsize: 3em
+
+	display: flex
 	width: 100%
 
-	flex-direction: row
 	align-items: center
+	flex-direction: row
 	justify-content: flex-start
 
-	$iconsize: 3em
+	background: $light-charcoal
 
 	/* Device */
 	& > div
-		position: relative
 		display: flex
-		flex-direction: column
-		align-items: center
 		margin: 0.5em
+		position: relative
+
+		align-items: center
+		flex-direction: column
 
 		/* Device icon */
 		img
 			height: $iconsize
-			width: $iconsize
 			margin: 0.25em
-			border-radius: 25%
-			background: #ffffff7f
 			padding: 5px
+			width: $iconsize
+
+			background: #ffffff7f
+			border-radius: 25%
 
 		/* Status icon */
 		div
 			display: block
-			border-radius: 50%
-			background: red
-			width: 1em
 			height: 1em
+			width: 1em
+
+			background: red
+			border-radius: 50%
 		
 		&.inactive div:nth-child(2)
 			background: red
@@ -57,15 +113,16 @@ html, body
 		
 		/* Context menu */
 		ul
-			position: absolute
-			background: white
-			top: $iconsize + (0.25em * 2) + (1em) + (0.5em)
 			left: 0
-			list-style: none
-			padding-inline-start: 0
 			margin: 0
 			min-width: 1em
+			padding-inline-start: 0
+			position: absolute
+			top: $iconsize + (0.25em * 2) + (1em) + (0.5em)
 			z-index: 20
+
+			background: white
+			list-style: none
 
 			&.hidden
 				display: none
@@ -75,6 +132,7 @@ html, body
 
 			& li.button
 				padding: 0 0.25em
+
 				white-space: nowrap
 			
 			& li:hover:not(.spacer)
@@ -82,18 +140,17 @@ html, body
 
 .gloss_button
 	display: flex
-	align-items: center
-	justify-content: center
+	height: 2.5em
+	width: 2.5em
 	
+	background: #D8D8D8
 	border: 5px solid #808080
 	border-top-color: #909090
 	border-bottom-color: #707070
-	background: #D8D8D8
-	
 	font-size: 1em
-
-	width: 2.5em
-	height: 2.5em
+	
+	align-items: center
+	justify-content: center
 
 	&:active
 		background: #B8B8B8
