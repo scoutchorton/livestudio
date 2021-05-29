@@ -16,14 +16,14 @@
 	"author": "scoutchorton",
 	"license": "ISC",
 	"dependencies": {
-		"electron": "^11.4.4",
-		"electron-rebuild": "^2.3.5",
+		"electron": "^13.0.1",
 		"material-design-icons": "^3.0.1",
 		"npm": "^7.11.2",
-		"sass": "^1.32.12",
 		"vue": "^2.6.12"
 	},
 	"devDependencies": {
-		"demolivestudiomodule": "file:../DemoLiveStudioModule"
+		"demolivestudiomodule": "file:../DemoLiveStudioModule",
+		"electron-rebuild": "^2.3.5",
+		"sass": "^1.32.12"
 	}
 }

@@ -13,7 +13,8 @@ function createWindow() {
 		height: 600,
 		webPreferences: {
 			nodeIntegration: true,
-			devTools: true
+			devTools: true,
+			contextIsolation: false //New as of Electron 12. Since local code is used, there would be a larger problem if this was needed. I assume this is for something like Discord which could use the actual Discord web app inside the Electron app.
 		},
 		center: true
 	});
