@@ -7,8 +7,7 @@
 	"scripts": {
 		"start": "electron ./src/index.js",
 		"debug": "electron ./src/index.js --debug",
-		"postinstall": "npm run sass && electron-rebuild",
-		"build": "electron-rebuild",
+		"build": "npm run sass && electron-rebuild",
 		"sass": "sass ./static/sass/:./static/styles/ -s compressed --update",
 		"sass-watch": "sass ./static/sass/:./static/styles/ -s compressed --update --watch --poll",
 		"docs": "jsdoc -R .\\README.md -d .\\docs\\ .\\src\\"
