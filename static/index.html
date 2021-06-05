@@ -56,7 +56,7 @@
 
 		<template id="tmpl-Statusbar">
 			<div id="statusbar">
-				<div v-for="device in devices" v-bind:class="device.stateClass" v-bind:name="device.name" v-on:click.right="contextMenu = (contextMenu == -1) ? devices.indexOf(device) : -1">
+				<div v-for="device in devices" v-bind:class="device.state === 2 ? 'live' : device.state === 1 ? 'connecting' : 'inactive'" v-bind:name="device.name" v-on:click.right="contextMenu = (contextMenu == -1) ? devices.indexOf(device) : -1">
 					<img v-bind:src="device.iconURL" />
 					<div></div>
 					<ul v-bind:class="(contextMenu === devices.indexOf(device)) ? '' : 'hidden'">

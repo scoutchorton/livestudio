@@ -1,5 +1,5 @@
 (() => {
-	let { ipcRenderer } = require("electron");
+	const { ipcRenderer } = require("electron");
 
 	//Wait until document finishes loading
 	window.addEventListener("load", () => {
@@ -15,4 +15,30 @@
 		//Initalize modules
 		ipcRenderer.send("init");
 	});
+
+	statusbar.addDevice({
+		name: "LiveStudio",
+		iconURL: 'assets/square_logo-64.png',
+		menu: [
+			{
+				name: "Reload",
+				type: "button",
+				callback: () => {
+					window.location.reload();
+				}
+			},
+			{
+				type: "spacer",
+			},
+			{
+				name: "Quit",
+				type: "button",
+				callback: () => {
+					if(confirm("Are you sure you want to close Live Studio?"))
+						window.close();
+				}
+			}
+		]
+	});
+	statusbar.setState('LiveStudio', 2);
 })();

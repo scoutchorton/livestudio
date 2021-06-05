@@ -11,6 +11,12 @@ $light-charcoal: #737373
 	100%
 		transform: rotate(360deg)
 
+@keyframes blinking
+	0%
+		opacity: 1	
+	50%
+		opacity: 0
+
 /* Global attributes
 	
 html, body
@@ -62,7 +68,7 @@ html, body
 		opacity: 0
 		visibility: hidden
 
-		transition: opacity 2.5s linear 0s, visibility 0s linear 2.5s
+		transition: opacity 1.5s ease-out 0s, visibility 0s linear 1.5s
 
 #statusbar
 	$iconsize: 3em
@@ -106,10 +112,11 @@ html, body
 		
 		&.inactive div:nth-child(2)
 			background: red
-		&.connected div:nth-child(2)
-			background: lightyellow
+		&.connecting div:nth-child(2)
+			background: yellow
+			animation: blinking 1s steps(1) 0s infinite reverse none
 		&.live div:nth-child(2)
-			background: lightgreen
+			background: #00ff00
 		
 		/* Context menu */
 		ul
@@ -128,29 +135,13 @@ html, body
 				display: none
 			
 			& li.spacer
-				border: 1px solid black
+				border: none
+				border-bottom: 1px solid black
 
 			& li.button
-				padding: 0 0.25em
+				padding: 0.5em 0.5em
 
 				white-space: nowrap
 			
 			& li:hover:not(.spacer)
 				background: lightgrey
-
-.gloss_button
-	display: flex
-	height: 2.5em
-	width: 2.5em
-	
-	background: #D8D8D8
-	border: 5px solid #808080
-	border-top-color: #909090
-	border-bottom-color: #707070
-	font-size: 1em
-	
-	align-items: center
-	justify-content: center
-
-	&:active
-		background: #B8B8B8
