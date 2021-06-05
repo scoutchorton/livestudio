@@ -1,17 +1,19 @@
-const { ipcRenderer } = require('electron');
-//const livestudio = require('../src/LiveStudio.js');
+//const livestudio = require("../src/LiveStudio.js");
+
+//Debug
+let quit = window.close;
 
 /**
  * Key handling
  * @ignore
  */
-document.addEventListener('keyup', e => {
+document.addEventListener("keyup", e => {
 	//Close window prompt
-	if((e.code === 'KeyW' && e.ctrlKey) || (e.code === 'KeyQ' && e.ctrlKey)) {
+	if((e.code === "KeyW" && e.ctrlKey) || (e.code === "KeyQ" && e.ctrlKey)) {
 		e.preventDefault();
-		if(window.confirm('Are you sure you want to close Live Studio?'))
+		if(window.confirm("Are you sure you want to close Live Studio?"))
 			window.close();
-	} else if(e.code === 'F5') {
+	} else if(e.code === "F5") {
 		e.preventDefault();
 		window.location.reload();
 	}
@@ -21,8 +23,8 @@ document.addEventListener('keyup', e => {
  * Vue
  */
 var statusbar = new Vue({
-	el: '#statusbar',
-	template: document.getElementById('tmpl-Statusbar').innerHTML,
+	el: "#statusbar",
+	template: document.getElementById("tmpl-Statusbar").innerHTML,
 	data: () => {
 		return {
 			devices: [],
@@ -37,7 +39,7 @@ var statusbar = new Vue({
 			}
 		},
 		toggleContentMenu: () => {
-			statusbar.$set(statusbar.$data, 'contextMenu', -1);
+			statusbar.$set(statusbar.$data, "contextMenu", -1);
 		},
 		addDevice: (settings) => {
 			//Check for required values
@@ -66,15 +68,15 @@ statusbar.addDevice({
 			name: "Setup",
 			type: "button",
 			callback: () => {
-				alert('Hello world!');
+				alert("Hello world!");
 			}
 		}, {
-			type: 'spacer'
+			type: "spacer"
 		}, {
 			name: "Mixer Panel",
-			type: 'button',
+			type: "button",
 			callback: () => {
-				alert('Opening Mixer Panel...');
+				alert("Opening Mixer Panel...");
 			}
 		}
 	]
@@ -88,38 +90,38 @@ statusbar.addDevice({
 			name: "Connect",
 			type: "button",
 			callback: () => {
-				alert('Connecting to camera...');
+				alert("Connecting to camera...");
 			}
 		}, {
 			name: "Movement",
-			type: 'button',
+			type: "button",
 			callback: () => {
-				alert('Control the camera position');
+				alert("Control the camera position");
 			}
 		}, {
-			type: 'spacer'
+			type: "spacer"
 		}, {
 			name: "Settings",
-			type: 'button',
+			type: "button",
 			callback: () => {
-				alert('Opening settings Panel...');
+				alert("Opening settings Panel...");
 			}
 		}
 	]
 });
-statusbar.setState('switcher', 2);
+statusbar.setState("switcher", 2);
 
-document.body.addEventListener('click', (e) => {
+document.body.addEventListener("click", (e) => {
 	statusbar.toggleContentMenu();
 });
-document.body.addEventListener('keyup', (e) => {
-	if(e.key === 'Escape')
+document.body.addEventListener("keyup", (e) => {
+	if(e.key === "Escape")
 		statusbar.toggleContentMenu();
 });
 
 switcherControls = new Pane({
-	template: document.getElementById('tmpl-Pane').innerHTML,
-	name: 'Switcher Controls'
+	template: document.getElementById("tmpl-Pane").innerHTML,
+	name: "Switcher Controls"
 });
 switcherControls.vm.x = 300;
 switcherControls.vm.y = 300;
