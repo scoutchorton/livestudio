@@ -1,28 +1,47 @@
 /**
  * @file LiveStudio.js
- * @description Base functions for LiveStudio modules
+ * @desc Base functions for LiveStudio modules
  * @author scoutchorton
  * 
  * @module LiveStudio
  */
-const { ipcRenderer } = require("electron");
+const { ipcMain } = require("electron");
 
 /**
- * @function registerMenuItem
- * @description Register a menu item in the status bar
+ * Register a menu item in the status bar
+ * @method
  * 
- * @argument settings Options for the menu item
+ * @param {Object} settings Options for the menu item
+ * @param {String} settings.name Name to display for the menu item
+ * @param {String} settings.iconURL Icon to show
+ * @param {Array} settings.menu Context menu data
+ * 
+ * @returns {Boolean} True on success, false on error
  */
 function registerMenuItem(settings) {
 	//Argument processing
 	if(settings === undefined)
 		throw "settings undefined";
+	
+	console.log("REGISTERING MENU", settings);
+	
+	ipcMain.send("reigster-device", settings);
 }
-
 
 /**
- * Exports
+ * Open a pane within the LiveStudio window
+ * @method
+ * 
+ * @param {Objects} settings Options for Pane
  */
-module.exports = {
-	registerMenuItem: this.registerMenuItem
+function createPane(settings) {
+	//Argument processing
+	if(settings === undefined)
+		throw "settings undefined";
+	
+	console.log("REGISTERING MENU", settings);
+
+	ipcMain.send("create-pane", settings);
 }
+
+module.exports = this;

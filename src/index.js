@@ -2,14 +2,16 @@
  * @file index.js
  * @description Main entrypoint for LiveStudio interface
  * @author scoutchorton
+ * @ignore
  */
 const { app, BrowserWindow, globalShortcut, ipcMain, dialog } = require("electron");
 const init = require("./init");
+const livestudio = require("./LiveStudio");
 
-/**
+/*
  * Electron
- * @ignore
  */
+
 function createWindow() {
 	//Create window
 	const win = new BrowserWindow({
@@ -53,23 +55,6 @@ app.on("activate", () => {
 //Initalization listener
 ipcMain.on("init", (e) => {
 	console.log(e);
-	e.returnValue = {status: "foo"};
-	console.log("Replied!");
-
-	/*
-	init.initModules().then(() => {
-
-	});
-	*/
+	init.initModules();
+	e.reply("init", {status: true})
 });
-/*
-ipcMain.on("button", (e, arg) => {
-	//Process different buttons
-	if(arg === "auto")
-		switcher.auto();
-	else if(arg === "cut")
-		switcher.cut();
-	else if(arg === "fadeToBlack")
-		switcher.fadeToBlack();
-});
-*/

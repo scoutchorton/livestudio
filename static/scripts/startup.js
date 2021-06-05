@@ -1,16 +1,18 @@
-const { ipcRenderer } = require("electron");
+(() => {
+	let { ipcRenderer } = require("electron");
 
-window.addEventListener("load", () => {
-	ipcRenderer.once("init")
-	let res = ipcRenderer.send("init");
+	//Wait until document finishes loading
+	window.addEventListener("load", () => {
+		//Deal with initalization response
+		ipcRenderer.once("init", (e, res) => {
+			console.log("init status", res);
+			if(res.status)
+				document.getElementById("preload").classList.add("hidden");
+			else
+				alert("An error occurred while loading LiveStudio.");
+		});
 
-	/*
-	const init = require("../src/init.js");
-
-	//Load modules n stuff
-	init.initModules().then(res => {
-		console.log("Done loading!", res);
-		document.getElementById("preload").classList.add("hidden");
+		//Initalize modules
+		ipcRenderer.send("init");
 	});
-	*/
-});
+})();

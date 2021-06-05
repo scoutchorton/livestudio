@@ -31,8 +31,6 @@
         
             
         
-            
-        
     
 </header>
 
@@ -40,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">Base functions for LiveStudio modules</div>
+            <div class="description"><p>Base functions for LiveStudio modules</p></div>
         
 
         
@@ -127,94 +125,6 @@
 
 
         
-            
-
-    
-
-    
-    <h4 class="name" id="module:LiveStudio"><span class="type-signature"></span>module:LiveStudio<span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Exports
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="LiveStudio.js.html">LiveStudio.js</a>, <a href="LiveStudio.js.html#line26">line 26</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
     
     </div>
 
@@ -241,7 +151,7 @@
     
 
     
-    <h4 class="name" id="~registerMenuItem"><span class="type-signature">(inner) </span>registerMenuItem<span class="signature">(settings)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~createPane"><span class="type-signature">(inner) </span>createPane<span class="signature">(settings)</span><span class="type-signature"></span></h4>
     
 
     
@@ -249,7 +159,7 @@
 
 
 <div class="description">
-    Register a menu item in the status bar
+    <p>Open a pane within the LiveStudio window</p>
 </div>
 
 
@@ -290,13 +200,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Objects</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">Options for the menu item</td>
+            <td class="description last"><p>Options for Pane</p></td>
         </tr>
 
     
@@ -337,7 +252,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="LiveStudio.js.html">LiveStudio.js</a>, <a href="LiveStudio.js.html#line10">line 10</a>
+        <a href="LiveStudio.js.html">LiveStudio.js</a>, <a href="LiveStudio.js.html#line37">line 37</a>
     </li></ul></dd>
     
 
@@ -368,6 +283,260 @@
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="~registerMenuItem"><span class="type-signature">(inner) </span>registerMenuItem<span class="signature">(settings)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Register a menu item in the status bar</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>settings</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Options for the menu item</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Name to display for the menu item</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>iconURL</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Icon to show</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>menu</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Context menu data</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="LiveStudio.js.html">LiveStudio.js</a>, <a href="LiveStudio.js.html#line21">line 21</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>True on success, false on error</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
@@ -383,13 +552,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-LiveStudio.html">LiveStudio</a></li></ul><h3>Global</h3><ul><li><a href="global.html#initModules">initModules</a></li><li><a href="global.html#loadModule">loadModule</a></li><li><a href="global.html#moduleCache">moduleCache</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-LiveStudio.html">LiveStudio</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Jun 05 2021 12:01:52 GMT-0400 (Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Sat Jun 05 2021 17:25:55 GMT-0400 (Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

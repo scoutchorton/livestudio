@@ -1,7 +1,8 @@
 /**
  * @file init.js
- * @description Methods and properties needed to load the LiveStudio environment
+ * @desc Methods and properties needed to load the LiveStudio environment
  * @author scoutchorton
+ * @ignore
  */
 const fs = require("fs");
 const npm = require("npm");
@@ -10,7 +11,8 @@ const packagelock = require("../package-lock.json");
  
 /**
  * Cache to store module data
- * @property moduleCache
+ * @member
+ * @ignore
  */
 var moduleCache = {};
  
@@ -18,6 +20,7 @@ var moduleCache = {};
  * Find and initalize modules
  * @method
  * @async
+ * @ignore
  * 
  * @returns {Boolean}
  */
@@ -48,18 +51,19 @@ async function initModules() {
 	console.log(this.moduleCache);
 
 	return true;
- };
+};
  
- /**
-  * Load a module from a path
-  * @method
-  * @async
-  * 
-  * @argument path A string with the path to a package location
-  * 
-  * @return {Object}
-  */
- async function loadModule(path) {
+/**
+ * Load a module from a path
+ * @method
+ * @async
+ * @ignore
+ * 
+ * @param {String} path A string with the path to a package location
+ * 
+ * @return {Object}
+ */
+async function loadModule(path) {
 	console.log(`Loading a package at ${path}`);
 
 	//Attempt to open package data
@@ -93,15 +97,5 @@ async function initModules() {
 	
 	return this.moduleCache[tmpPackage.name];
 };
- 
-/**
- * Exports
- */
-module.exports = {
-	//Properties
-	moduleCache: moduleCache,
 
-	//Methods
-	initModules: initModules,
-	loadModule: loadModule
-}
+module.exports = this;

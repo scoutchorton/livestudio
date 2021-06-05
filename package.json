@@ -10,7 +10,7 @@
 		"build": "npm run sass && electron-rebuild",
 		"sass": "sass ./static/sass/:./static/styles/ -s compressed --update",
 		"sass-watch": "sass ./static/sass/:./static/styles/ -s compressed --update --watch --poll",
-		"docs": "jsdoc -R .\\README.md -d .\\docs\\ .\\src\\"
+		"docs": "jsdoc -c jsdoc_conf.json ./src/"
 	},
 	"author": "scoutchorton",
 	"license": "ISC",
