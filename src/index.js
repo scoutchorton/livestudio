@@ -1,4 +1,3 @@
-const fs = require('fs');
 const { app, BrowserWindow, globalShortcut, ipcMain, dialog } = require('electron');
 
 
@@ -26,6 +25,8 @@ function createWindow() {
 	//Open developer tools with the proper argument
 	if(process.argv.indexOf('--debug') >= 0 || process.argv.indexOf('-d') >= 0)
 		win.webContents.openDevTools();
+
+	return win;
 }
 
 //Launch application once loaded

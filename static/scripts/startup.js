@@ -1,8 +1,8 @@
 window.addEventListener('load', () => {
-	const livestudio = require('../src/LiveStudio.js');
+	const init = require('../src/init.js');
 
 	//Load modules n stuff
-	livestudio.initModules().then(res => {
+	init.initModules().then(res => {
 		console.log("Done loading!", res);
 		document.getElementById('preload').classList.add("hidden");
 	});
