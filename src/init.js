@@ -24,7 +24,7 @@ var moduleCache = {};
  * 
  * @returns {Boolean}
  */
-async function initModules() {
+module.exports.initModules = async () => {
 	//Grab package directory listing
 	let baseDir = npm.config.cwd;
 	let packageDirs = Object.keys(packagelock.packages);
@@ -44,11 +44,11 @@ async function initModules() {
 		//Check that module is a livestudio module and load module
 		if(tmpPackage.livestudio) {
 			console.log(tmpPackage.name);
-			await this.loadModule(dataPath);
+			await loadModule(dataPath);
 		}
 	}
 
-	console.log(this.moduleCache);
+	console.log(moduleCache);
 
 	return true;
 };
@@ -63,7 +63,7 @@ async function initModules() {
  * 
  * @return {Object}
  */
-async function loadModule(path) {
+let loadModule = async (path) => {
 	console.log(`Loading a package at ${path}`);
 
 	//Attempt to open package data
@@ -81,21 +81,19 @@ async function loadModule(path) {
 		return false;
 	 
 	//Find if module has been loaded already
-	if(Object.keys(this.moduleCache).indexOf(tmpPackage.name) > -1)
+	if(Object.keys(moduleCache).indexOf(tmpPackage.name) > -1)
 		return false;
 	console.log(path);
-	this.moduleCache[tmpPackage.name] = require(path);
+	moduleCache[tmpPackage.name] = require(path);
 
 	console.log(`Loading ${tmpPackage.name}`);
 
 	//Error out if there is no init
-	if(this.moduleCache[tmpPackage.name].init === undefined)
+	if(moduleCache[tmpPackage.name].init === undefined)
 		throw `Invalid package ${tmpPackage.name}: no init method exported.`;
 	
 	//Initalize module
-	this.moduleCache[tmpPackage.name].init();
+	moduleCache[tmpPackage.name].init();
 	
-	return this.moduleCache[tmpPackage.name];
+	return moduleCache[tmpPackage.name];
 };
-
-module.exports = this;

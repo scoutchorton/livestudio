@@ -5,8 +5,8 @@
  * @ignore
  */
 const { app, BrowserWindow, globalShortcut, ipcMain, dialog } = require("electron");
-const init = require("./init");
-const livestudio = require("./LiveStudio");
+const init = require("./init.js");
+const livestudio = require("./LiveStudio.js");
 
 /*
  * Electron
@@ -54,7 +54,8 @@ app.on("activate", () => {
 
 //Initalization listener
 ipcMain.on("init", (e) => {
-	console.log(e);
+	//console.log(e);
+	//console.log(init);
 	init.initModules();
 	e.reply("init", {status: true})
 });

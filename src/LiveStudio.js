@@ -18,7 +18,7 @@ const { ipcMain } = require("electron");
  * 
  * @returns {Boolean} True on success, false on error
  */
-function registerMenuItem(settings) {
+module.exports.registerMenuItem = (settings) => {
 	//Argument processing
 	if(settings === undefined)
 		throw "settings undefined";
@@ -26,7 +26,7 @@ function registerMenuItem(settings) {
 	console.log("REGISTERING MENU", settings);
 	
 	ipcMain.send("reigster-device", settings);
-}
+};
 
 /**
  * Open a pane within the LiveStudio window
@@ -34,7 +34,7 @@ function registerMenuItem(settings) {
  * 
  * @param {Objects} settings Options for Pane
  */
-function createPane(settings) {
+module.exports.createPane = (settings) => {
 	//Argument processing
 	if(settings === undefined)
 		throw "settings undefined";
@@ -42,6 +42,4 @@ function createPane(settings) {
 	console.log("REGISTERING MENU", settings);
 
 	ipcMain.send("create-pane", settings);
-}
-
-module.exports = this;
+};
