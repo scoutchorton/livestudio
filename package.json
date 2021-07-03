@@ -2,15 +2,15 @@
 	"name": "livestudio",
 	"version": "0.0.1",
 	"description": "",
-	"main": "./src/LiveStudio.js",
-	"bin": "./src/index.js",
+	"main": "src/LiveStudio.js",
+	"bin": "index.js",
 	"scripts": {
-		"start": "electron ./src/index.js",
-		"debug": "electron ./src/index.js --debug",
+		"start": "electron index.js",
+		"debug": "electron index.js --debug",
 		"build": "npm run sass && electron-rebuild",
-		"sass": "sass ./static/sass/:./static/styles/ -s compressed --update",
-		"sass-watch": "sass ./static/sass/:./static/styles/ -s compressed --update --watch --poll",
-		"docs": "jsdoc -c jsdoc_conf.json ./src/"
+		"sass": "sass static/sass/:static/styles/ -s compressed --update",
+		"sass-watch": "sass static/sass/:static/styles/ -s compressed --update --watch --poll",
+		"docs": "jsdoc -c jsdoc_conf.json src/"
 	},
 	"author": "scoutchorton",
 	"license": "ISC",

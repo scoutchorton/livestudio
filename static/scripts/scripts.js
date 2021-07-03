@@ -1,4 +1,6 @@
 const { ipcRenderer } = require("electron");
+const path = require("path");
+//const livestudio = require(path.join(__dirname, "..", "src/LiveStudio.js"));
 
 //Debug
 let quit = window.close;
@@ -39,25 +41,51 @@ var statusbar = new Vue({
 	},
 	methods: {
 		setState: (name, state) => {
-			statusbar.$set(statusbar.devices.filter((device) => {return device.name === name})[0], 'state', state);
+			statusbar.$set(statusbar.devices.filter((device) => {return device.name === name})[0], "state", state);
 		},
 		toggleContentMenu: () => {
 			statusbar.$set(statusbar.$data, "contextMenu", -1);
 		},
 		addDevice: (settings) => {
 			//Check for required values
-			if(settings.name === undefined || settings.name == "")
+			if(settings === undefined)
+				return false;
+			else if(settings.name === undefined || settings.name == "")
 				return false;
 			else if(settings.iconURL === undefined || settings.iconURL == "")
 				return false;
+
+			//Search for existing device
+			if(statusbar.$data.devices.find(dev => dev.name == settings.name) !== undefined)
+				throw new Error(`Device ${settings.name} already exists. Please remove device before adding it back.`); /** @todo Add reload device with new settings? */
 
 			//Set default values
 			settings.state = settings.state || 0;
 			settings.menu = settings.menu || [];
 
-			statusbar.$set(statusbar.$data.devices, statusbar.$data.devices.length, settings);
+			//Current device
+			let device = statusbar.$set(statusbar.$data.devices, statusbar.$data.devices.length, settings);
 
-			return true;
+			return device;
+		},
+		removeDevice: (device) => {
+			/*
+			//Argument check
+			if(name === undefined || name === "")
+				return false
+			
+			//Find name in list
+			let device = undefined;
+			/*
+			statusbar.$data.devices.forEach(d => {
+				console.log(device);
+				if(device.name === name) {
+
+				}
+			});
+			console.log("devices", statusbar.$data.devices.find(dev => dev.name == name))
+			*/
+			console.log(device, device.__proto__);
 		}
 	}
 });

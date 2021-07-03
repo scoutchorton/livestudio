@@ -4,17 +4,16 @@
  * @author scoutchorton
  * @ignore
  */
-const { app, BrowserWindow, globalShortcut, ipcMain, dialog } = require("electron");
-const init = require("./init.js");
-const livestudio = require("./LiveStudio.js");
+const { app, BrowserWindow, dialog, globalShortcut, ipcMain } = require("electron");
+const path = require("path");
+const init = require(path.join(__dirname, "src/init.js"));
 
 /*
  * Electron
  */
-
 function createWindow() {
 	//Create window
-	const win = new BrowserWindow({
+	win = new BrowserWindow({
 		width: 800,
 		height: 600,
 		webPreferences: {
@@ -22,12 +21,12 @@ function createWindow() {
 			devTools: true,
 			contextIsolation: false //New as of Electron 12. Since local code is used, there would be a larger problem if this was needed. I assume this is for something like Discord which could use the actual Discord web app inside the Electron app.
 		},
-		icon: 'static/assets/square_logo-64.png',
+		icon: "static/assets/square_logo-64.png",
 		center: true
 	});
 
 	//Setup window
-	win.loadFile("../static/index.html");
+	win.loadFile(path.join(app.getAppPath(), "static/index.html"));
 	win.setMenu(null);
 	win.maximize();
 
@@ -39,25 +38,28 @@ function createWindow() {
 }
 
 //Launch application once loaded
-app.whenReady().then(createWindow).catch(err => {
+module.exports.win = app.whenReady().then(createWindow).catch(err => {
 	app.quit();
 	throw err;
 });
 
-//Mac specific events
-app.on("window-all-closed", () => {
-	if(process.platform !== "darwin")
-		app.quit();
-});
-app.on("activate", () => {
-	if(BrowserWindow.getAllWindows().length === 0)
-		createWindow();
-});
+/*
+ * Run Electron window
+ */
+if(require.main === module) {
+	//Mac specific events
+	app.on("window-all-closed", () => {
+		if(process.platform !== "darwin")
+			app.quit();
+	});
+	app.on("activate", () => {
+		if(BrowserWindow.getAllWindows().length === 0)
+			createWindow();
+	});
 
-//Initalization listener
-ipcMain.on("init", (e) => {
-	//console.log(e);
-	//console.log(init);
-	init.initModules();
-	e.reply("init", {status: true})
-});
+	//Initalization listener
+	ipcMain.on("init", async (e) => {
+		await init.initModules();
+		e.reply("init", {status: true})
+	});
+}

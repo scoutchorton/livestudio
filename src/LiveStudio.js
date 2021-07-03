@@ -6,6 +6,8 @@
  * @module LiveStudio
  */
 const { ipcMain } = require("electron");
+const path = require("path");
+const main = require(path.join(__dirname, "..", "index.js"));
 
 /**
  * Register a menu item in the status bar
@@ -25,7 +27,7 @@ module.exports.registerMenuItem = (settings) => {
 	
 	console.log("REGISTERING MENU", settings);
 	
-	ipcMain.send("reigster-device", settings);
+	main.win.webContents.send("reigster-device", settings);
 };
 
 /**
@@ -39,7 +41,7 @@ module.exports.createPane = (settings) => {
 	if(settings === undefined)
 		throw "settings undefined";
 	
-	console.log("REGISTERING MENU", settings);
+	console.log("REGISTERING PANE", settings);
 
-	ipcMain.send("create-pane", settings);
+	main.win.webContents.send("create-pane", settings);
 };

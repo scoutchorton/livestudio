@@ -1,3 +1,5 @@
+let oof = undefined;
+
 (() => {
 	const { ipcRenderer } = require("electron");
 
@@ -12,33 +14,52 @@
 				alert("An error occurred while loading LiveStudio.");
 		});
 
+		//Add default LiveStudio view
+		statusbar.addDevice({
+			name: "LiveStudio",
+			iconURL: "assets/square_logo-64.png",
+			menu: [
+				{
+					name: "Reload",
+					type: "button",
+					callback: () => {
+						window.location.reload();
+					}
+				}, {
+					type: "divider",
+				}, {
+					name: "Quit",
+					type: "button",
+					callback: () => {
+						if(confirm("Are you sure you want to close Live Studio?"))
+							window.close();
+					}
+				}
+			]
+		});
+		oof = statusbar.addDevice({
+			name: "oof",
+			iconURL: "assets/square_logo-64.png",
+			menu: [
+				{
+					name: "Reload",
+					type: "button",
+					callback: () => {}
+				}, {
+					type: "divider",
+				}, {
+					name: "Quit",
+					type: "button",
+					callback: () => {}
+				}
+			]
+		});
+		statusbar.setState("LiveStudio", 2);
+
 		//Initalize modules
 		ipcRenderer.send("init");
-	});
 
-	statusbar.addDevice({
-		name: "LiveStudio",
-		iconURL: 'assets/square_logo-64.png',
-		menu: [
-			{
-				name: "Reload",
-				type: "button",
-				callback: () => {
-					window.location.reload();
-				}
-			},
-			{
-				type: "spacer",
-			},
-			{
-				name: "Quit",
-				type: "button",
-				callback: () => {
-					if(confirm("Are you sure you want to close Live Studio?"))
-						window.close();
-				}
-			}
-		]
+		//Display loaded view
+		document.getElementById("preload").classList.add("hidden");
 	});
-	statusbar.setState('LiveStudio', 2);
 })();

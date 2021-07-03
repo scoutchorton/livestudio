@@ -7,7 +7,8 @@
 const fs = require("fs");
 const npm = require("npm");
 const path = require("path");
-const packagelock = require("../package-lock.json");
+
+const packagelock = require(path.join(__dirname, "..", "package-lock.json"));
  
 /**
  * Cache to store module data
