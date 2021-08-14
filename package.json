@@ -21,6 +21,7 @@
 		"vue": "^2.6.12"
 	},
 	"devDependencies": {
+		"@vue/cli": "^4.5.13",
 		"demolivestudiomodule": "file:../DemoLiveStudioModule",
 		"electron-rebuild": "^2.3.5",
 		"sass": "^1.32.12"

@@ -20,7 +20,7 @@ let oof = undefined;
 			iconURL: "assets/square_logo-64.png",
 			menu: [
 				{
-					name: "Reload",
+					label: "Reload",
 					type: "button",
 					callback: () => {
 						window.location.reload();
@@ -28,7 +28,7 @@ let oof = undefined;
 				}, {
 					type: "divider",
 				}, {
-					name: "Quit",
+					label: "Quit",
 					type: "button",
 					callback: () => {
 						if(confirm("Are you sure you want to close Live Studio?"))
@@ -42,13 +42,13 @@ let oof = undefined;
 			iconURL: "assets/square_logo-64.png",
 			menu: [
 				{
-					name: "Reload",
+					label: "Reload",
 					type: "button",
 					callback: () => {}
 				}, {
 					type: "divider",
 				}, {
-					name: "Quit",
+					label: "Quit",
 					type: "button",
 					callback: () => {}
 				}

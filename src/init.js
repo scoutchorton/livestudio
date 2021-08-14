@@ -5,6 +5,7 @@
  * @ignore
  */
 const fs = require("fs");
+const { ipcMain } = require("electron");
 const npm = require("npm");
 const path = require("path");
 
@@ -60,17 +61,17 @@ module.exports.initModules = async () => {
  * @async
  * @ignore
  * 
- * @param {String} path A string with the path to a package location
+ * @param {String} packagePath A string with the path to a package location
  * 
  * @return {Object}
  */
-let loadModule = async (path) => {
-	console.log(`Loading a package at ${path}`);
+let loadModule = async (packagePath) => {
+	console.log(`Loading a package at ${packagePath}`);
 
 	//Attempt to open package data
 	let tmpPackage;
 	try {
-		tmpPackage = require(path + "/package.json");
+		tmpPackage = require(path.join(packagePath, "/package.json"));
 	} catch {
 		return false;
 	}
@@ -84,8 +85,8 @@ let loadModule = async (path) => {
 	//Find if module has been loaded already
 	if(Object.keys(moduleCache).indexOf(tmpPackage.name) > -1)
 		return false;
-	console.log(path);
-	moduleCache[tmpPackage.name] = require(path);
+	console.log(packagePath);
+	moduleCache[tmpPackage.name] = require(packagePath);
 
 	console.log(`Loading ${tmpPackage.name}`);
 

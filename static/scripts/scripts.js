@@ -32,7 +32,6 @@ document.body.addEventListener("keyup", (e) => {
  */
 var statusbar = new Vue({
 	el: "#statusbar",
-	template: document.getElementById("tmpl-Statusbar").innerHTML,
 	data: () => {
 		return {
 			devices: [],
@@ -89,7 +88,6 @@ var statusbar = new Vue({
 		}
 	}
 });
-console.log(statusbar);
 
 /*
  * Inter-process communication

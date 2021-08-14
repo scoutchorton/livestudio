@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<!---------->
+		<!-- Misc -->
+		<!---------->
 		<title>Live Studio</title>
 		
 		<!------------>
 		<!-- Styles -->
 		<!------------>
 
+		<!--<link href="styles/panekit.css" type="text/css" rel="stylesheet" />-->
 		<link href="styles/styles.css" type="text/css" rel="stylesheet" />
-		<link href="styles/panekit.css" type="text/css" rel="stylesheet" />
 		<link href="../node_modules/material-design-icons/iconfont/material-icons.css" type="text/css" rel="stylesheet" />
 
 		<!------------->
 		<!-- Scripts -->
 		<!------------->
 
-		<script src="scripts/panekit.js"></script>
 		<script src="../node_modules/vue/dist/vue.js"></script>
-		<script></script>
+		<script src="scripts/panekit.js"></script>
 
 		<!-------------->
 		<!-- Metadata -->
@@ -40,33 +42,23 @@
 		<!-- Page data -->
 		<!--------------->
 
-		<div id="statusbar"></div>
-
-		<!--
-		<div id="buttons_demo">
-			<span id="auto" class="gloss_button">AUTO</span>
-			<span id="cut" class="gloss_button">CUT</span>
-			<span id="fadeToBlack" class="gloss_button">FTB</span>
+		<div id="statusbar">
+			<div v-for="device in devices" v-bind:class="device.state === 2 ? 'live' : device.state === 1 ? 'connecting' : 'inactive'" v-bind:name="device.name" v-on:click.right="contextMenu = (contextMenu == -1) ? devices.indexOf(device) : -1">
+				<img v-bind:src="device.iconURL" v-bind:alt="device.name" v-bind:title="device.name"/>
+				<div></div>
+				<ul v-bind:class="(contextMenu === devices.indexOf(device)) ? '' : 'hidden'">
+					<li v-for="item in device.menu" v-bind:class="item.type">
+						<span v-if="item.type === 'button'" v-on:click="item.callback">{{ item.label }}</span>
+						<hr v-if="item.type === 'divider'">
+					</li>
+				</ul>
+			</div>
 		</div>
-		-->
-		
+
 		<!--------------->
 		<!-- Templates -->
 		<!--------------->
 
-		<template id="tmpl-Statusbar">
-			<div id="statusbar">
-				<div v-for="device in devices" v-bind:class="device.state === 2 ? 'live' : device.state === 1 ? 'connecting' : 'inactive'" v-bind:name="device.name" v-on:click.right="contextMenu = (contextMenu == -1) ? devices.indexOf(device) : -1">
-					<img v-bind:src="device.iconURL" v-bind:alt="device.name" v-bind:title="device.name"/>
-					<div></div>
-					<ul v-bind:class="(contextMenu === devices.indexOf(device)) ? '' : 'hidden'">
-						<li v-for="item in device.menu" v-bind:class="item.type">
-							<span v-if="item.type === 'button'" v-on:click="item.callback">{{ item.name }}</span>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</template>
 		<template id="tmpl-Pane">
 			<div class="pane" v-bind:class="{minimized: minimized, focused: focused}" v-bind:style="{left: x + 'px', top: y + 'px'}">
 				<div id="titlebar" draggable v-on:dragend="__dragend_handler" v-on:dragstart="__dragstart_handler">

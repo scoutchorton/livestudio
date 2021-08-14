@@ -5,7 +5,8 @@
  * 
  * @module LiveStudio
  */
-const { ipcMain } = require("electron");
+//const { ipcMain, app } = require("electron");
+const electron = require("electron");
 const path = require("path");
 const main = require(path.join(__dirname, "..", "index.js"));
 
@@ -27,6 +28,7 @@ module.exports.registerMenuItem = (settings) => {
 	
 	console.log("REGISTERING MENU", settings);
 	
+	console.log()
 	main.win.webContents.send("reigster-device", settings);
 };
 
@@ -44,4 +46,17 @@ module.exports.createPane = (settings) => {
 	console.log("REGISTERING PANE", settings);
 
 	main.win.webContents.send("create-pane", settings);
+};
+
+module.exports.win = null;
+
+module.exports.testMe = () => {
+	/*
+	console.dir(electron);
+	console.log(electron.BaseWindow);
+	console.log(electron.BrowserWindow);
+	console.log(electron.BrowserWindow.getAllWindows());
+	*/
+	//console.log(electron.app.BrowserWindow.getAllWindows());
+	console.log(electron.app);
 };

@@ -7,6 +7,7 @@
 const { app, BrowserWindow, dialog, globalShortcut, ipcMain } = require("electron");
 const path = require("path");
 const init = require(path.join(__dirname, "src/init.js"));
+const LiveStudio = require('./src/LiveStudio.js');
 
 /*
  * Electron
@@ -38,7 +39,7 @@ function createWindow() {
 }
 
 //Launch application once loaded
-module.exports.win = app.whenReady().then(createWindow).catch(err => {
+app.whenReady().then(createWindow).catch(err => {
 	app.quit();
 	throw err;
 });
@@ -56,6 +57,9 @@ if(require.main === module) {
 		if(BrowserWindow.getAllWindows().length === 0)
 			createWindow();
 	});
+
+	//Test
+	LiveStudio.testMe();
 
 	//Initalization listener
 	ipcMain.on("init", async (e) => {
