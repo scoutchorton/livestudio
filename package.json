@@ -17,6 +17,7 @@
 	"dependencies": {
 		"electron": "^13.1.9",
 		"material-design-icons": "^3.0.1",
+		"npm": "^7.21.0",
 		"vue": "^2.6.14"
 	},
 	"devDependencies": {

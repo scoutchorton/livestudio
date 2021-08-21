@@ -26,6 +26,7 @@ var moduleCache = {};
  * 
  * @returns {Boolean}
  */
+/*
 module.exports.initModules = async () => {
 	//Grab package directory listing
 	let baseDir = npm.config.cwd;
@@ -54,6 +55,7 @@ module.exports.initModules = async () => {
 
 	return true;
 };
+*/
  
 /**
  * Load a module from a path
@@ -65,6 +67,7 @@ module.exports.initModules = async () => {
  * 
  * @return {Object}
  */
+/*
 let loadModule = async (packagePath) => {
 	console.log(`Loading a package at ${packagePath}`);
 
@@ -77,7 +80,7 @@ let loadModule = async (packagePath) => {
 	}
 
 	//Validate package
-	if(tmpPackage.main === undefined) /** @todo Search for path + "/index.js". When running `node .`, it will execute `node ./index.js` or error if not existant, so loading a module should work the same. */
+	if(tmpPackage.main === undefined) // @todo Search for path + "/index.js". When running `node .`, it will execute `node ./index.js` or error if not existant, so loading a module should work the same.
 		return false;
 	else if(tmpPackage.livestudio === undefined || tmpPackage.livestudio == false)
 		return false;
@@ -99,3 +102,4 @@ let loadModule = async (packagePath) => {
 	
 	return moduleCache[tmpPackage.name];
 };
+*/

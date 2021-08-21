@@ -1,6 +1,7 @@
 {
 	"opts": {
-		"destination": "docs/"
+		"destination": "docs/",
+		"recurse": true
 	},
 	"plugins": [
 		"plugins/markdown"

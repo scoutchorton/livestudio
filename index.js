@@ -7,7 +7,7 @@
 const { app, BrowserWindow, dialog, globalShortcut, ipcMain } = require("electron");
 const path = require("path");
 const init = require(path.join(__dirname, "src/init.js"));
-const LiveStudio = require('./src/LiveStudio.js');
+const { Core } = require('./src/LiveStudio/LiveStudio.js');
 
 /*
  * Electron
@@ -58,12 +58,9 @@ if(require.main === module) {
 			createWindow();
 	});
 
-	//Test
-	LiveStudio.testMe();
-
 	//Initalization listener
-	ipcMain.on("init", async (e) => {
-		await init.initModules();
-		e.reply("init", {status: true})
+	ipcMain.on("PageLoad", async (e) => {
+		console.log("Page loaded. Starting to load modules...");
+		console.log(require("./src/LiveStudio/LiveStudio.js"));
 	});
 }

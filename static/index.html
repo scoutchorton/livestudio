@@ -19,7 +19,7 @@
 		<!------------->
 
 		<script src="../node_modules/vue/dist/vue.js"></script>
-		<script src="scripts/panekit.js"></script>
+		<!--<script src="scripts/panekit.js"></script>-->
 
 		<!-------------->
 		<!-- Metadata -->
@@ -42,6 +42,7 @@
 		<!-- Page data -->
 		<!--------------->
 
+		<!--
 		<div id="statusbar">
 			<div v-for="device in devices" v-bind:class="device.state === 2 ? 'live' : device.state === 1 ? 'connecting' : 'inactive'" v-bind:name="device.name" v-on:click.right="contextMenu = (contextMenu == -1) ? devices.indexOf(device) : -1">
 				<img v-bind:src="device.iconURL" v-bind:alt="device.name" v-bind:title="device.name"/>
@@ -54,11 +55,13 @@
 				</ul>
 			</div>
 		</div>
+		-->
 
 		<!--------------->
 		<!-- Templates -->
 		<!--------------->
 
+		<!--
 		<template id="tmpl-Pane">
 			<div class="pane" v-bind:class="{minimized: minimized, focused: focused}" v-bind:style="{left: x + 'px', top: y + 'px'}">
 				<div id="titlebar" draggable v-on:dragend="__dragend_handler" v-on:dragstart="__dragstart_handler">
@@ -72,12 +75,14 @@
 				<div id="content" v-html="content"></div>
 			</div>
 		</template>
+		-->
 
 		<!------------->
 		<!-- Scripts -->
 		<!------------->
 
-		<script src="scripts/scripts.js"></script>
 		<script src="scripts/startup.js"></script>
+		<script src="scripts/scripts.js"></script>
+		<script src="scripts/LiveStudio.js"></script>
 	</body>
 	</html>
