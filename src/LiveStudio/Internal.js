@@ -14,12 +14,32 @@ var module_cache = {};
  * Load a module into the LiveStudio system
  * @module LiveStudio/Internal/Module
  * 
- * @param {String} name Name of the module to register (name of npm package)
+ * @param {String} name Name of package
  * @returns {Object} Registered module data
- * @throws Throws when not able to find the specified module
+ * @throws {RegistrationError} Throws when not able to find the specified module
  */
-function registerModule(name) {
+function addRegistry(name) {
+	let tmpModule;
+	try {
+		tmpModule = require(name);
+	} catch(e) {
+		console.log(e);
+	}
+	//throw new module.exports.Error.RegistrationError(`Could not find module at ${path}`);
+};
 
+/**
+ * Load a module into the LiveStudio system with a path to the package
+ * @module LiveStudio/Internal/Module
+ * 
+ * @param {String} path Path to module
+ * @returns {Object} Registered module data
+ * @throws {RegistrationError} Throws when not able to find the specified module
+ */
+function addRegistryPath(path) {
+	//Do stuff like validate path, maybe get main file from package.json or just require it or something?
+	return;
+	//throw new module.exports.Error.RegistrationError(`Could not find module at ${path}`);
 };
 
 
@@ -44,6 +64,7 @@ module.exports = {
 		RegistrationError
 	},
 	Module: {
-		registerModule: registerModule
+		addRegistryPath: addRegistryPath,
+		addRegistry: addRegistry
 	}
 }
