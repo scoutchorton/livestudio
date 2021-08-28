@@ -5,9 +5,3 @@
  * 
  * @module LiveStudio/GUI
  */
-
-/**
- * Demo GUI function
- * @returns { Boolean }
- */
-module.exports.GUIFunction = () => { return true; }

@@ -9,7 +9,8 @@ const { ipcMain } = require("electron");
 const npm = require("npm");
 const path = require("path");
 
-const packagelock = require(path.join(__dirname, "..", "package-lock.json"));
+console.log(path.join(__dirname, "..", "..", "package-lock.json"));
+const packagelock = require(path.join(__dirname, "..", "..", "package-lock.json"));
  
 /**
  * Cache to store module data

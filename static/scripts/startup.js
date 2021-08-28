@@ -8,8 +8,8 @@
 
 	//Wait until page finishes loading and start initalization
 	window.addEventListener("load", () => {
-		//document.getElementById("preload").classList.add("hidden"); //Move to once all modules are loaded
 		ipcRenderer.send("PageLoad"); //Let LiveStudio handle 
+		//document.getElementById("preload").classList.add("hidden"); //Move to once all modules are loaded
 	});
 })();
 
