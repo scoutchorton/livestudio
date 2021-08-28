@@ -9,8 +9,6 @@
 const Internal = require("./Internal.js");
 const path = require("path");
 
-const package_lock = require(path.join(__dirname, "..", "..", "node_modules", ".package-lock.json"));
-
 
 
 /**
@@ -21,6 +19,8 @@ function initModules() {
 	console.log("Initalizing modules...");
 
 	//Directories
+	console.log(`Processing ${path.join(__dirname, "..", "..", "node_modules", ".package-lock.json")}`);
+	let package_lock = require(path.join(__dirname, "..", "..", "node_modules", ".package-lock.json"));;
 	let baseDir = path.join(__dirname, "..", "..");
 	let packageDirs = Object.keys(package_lock.packages);
 	let fullPackageDirs = packageDirs.map(p => { return baseDir + "/" + p});
@@ -34,8 +34,9 @@ function initModules() {
 		} catch {
 			continue;
 		}
-
+		
 		//Check if using LiveStudio
+		console.log(`Processing package ${dataPath}`);
 		if(tmpPackage.engines != undefined && tmpPackage.engines.livestudio != undefined && tmpPackage.engines.livestudio == true) {
 			//console.log(tmpPackage.name);
 			Internal.Module.addRegistry(tmpPackage.name);
