@@ -25,5 +25,8 @@
 		"electron-packager": "^15.3.0",
 		"electron-rebuild": "^2.3.5",
 		"sass": "^1.37.5"
+	},
+	"engines": {
+		"electron": true
 	}
 }

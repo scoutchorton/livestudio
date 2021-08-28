@@ -6,6 +6,7 @@
  * @module LiveStudio/Core
  */
 
+const Internal = require("./Internal.js");
 const path = require("path");
 
 const package_lock = require(path.join(__dirname, "..", "..", "node_modules", ".package-lock.json"));
@@ -18,15 +19,28 @@ const package_lock = require(path.join(__dirname, "..", "..", "node_modules", ".
  */
 function initModules() {
 	console.log("Initalizing modules...");
+
 	//Directories
 	let baseDir = path.join(__dirname, "..", "..");
 	let packageDirs = Object.keys(package_lock.packages);
 	let fullPackageDirs = packageDirs.map(p => { return baseDir + "/" + p});
 
-	//console.log("baseDir:", packageDirs.map(p => {return baseDir + "/" + p}));
-	//console.log("__dirname: ", packageDirs.map(p => {return __dirname + "/" + p}));
-	//console.log(baseDir, __dirname, path.join(__dirname, "..", ".."));
-	//console.log("Package base: ", path.join(__dirname, "..", ".."));
+	//Iterate over package paths
+	for(let dataPath of fullPackageDirs) {
+		//Load package details
+		let tmpPackage;
+		try {
+			tmpPackage = require(path.join(dataPath, "package.json"));
+		} catch {
+			continue;
+		}
+
+		//Check if using LiveStudio
+		if(tmpPackage.engines != undefined && tmpPackage.engines.livestudio != undefined && tmpPackage.engines.livestudio == true) {
+			//console.log(tmpPackage.name);
+			Internal.Module.addRegistry(tmpPackage.name);
+		}
+	}
 }
 
 
