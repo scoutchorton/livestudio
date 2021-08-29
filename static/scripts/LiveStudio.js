@@ -8,4 +8,4 @@
 /*
  * Requires
  */
-const {ipcRenderer} = require("electron");
+const { ipcRenderer } = require("electron");

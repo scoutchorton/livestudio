@@ -21,7 +21,9 @@ var module_cache = {};
 function addRegistry(name) {
 	let tmpModule;
 	try {
+		console.log(`[INFO]   Attempt to require ${name}`)
 		tmpModule = require(name);
+		console.log(`[INFO] Attempted to require ${name}`)
 	} catch(e) {
 		console.log(e);
 	}
@@ -37,8 +39,16 @@ function addRegistry(name) {
  * @throws {RegistrationError} Throws when not able to find the specified module
  */
 function addRegistryPath(path) {
-	//Do stuff like validate path, maybe get main file from package.json or just require it or something?
-	return;
+	/** @todo Do stuff like validate path, maybe get main file from package.json or just require it or something? */
+
+	let tmpModule;
+	try {
+		console.log(`[INFO]   Attempt to require at ${path}`)
+		tmpModule = require(path);
+		console.log(`[INFO] Attempted to require at ${path}`)
+	} catch(e) {
+		console.log(e);
+	}
 	//throw new module.exports.Error.RegistrationError(`Could not find module at ${path}`);
 };
 
