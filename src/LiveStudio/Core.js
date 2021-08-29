@@ -19,8 +19,9 @@ function initModules() {
 	console.log("Initalizing modules...");
 
 	//Directories
-	console.log(`Processing ${path.join(__dirname, "..", "..", "node_modules", ".package-lock.json")}`);
+	//console.log(`Processing ${path.join(__dirname, "..", "..", "node_modules", ".package-lock.json")}`);
 	let package_lock = require(path.join(__dirname, "..", "..", "node_modules", ".package-lock.json"));
+	let packages = package_lock.packages;
 	//let baseDir = path.join(__dirname, "..", "..");
 	//let packageDirs = Object.keys(package_lock.packages);
 	//let fullPackageDirs = packageDirs.map(p => { return baseDir + "/" + p});
@@ -47,8 +48,12 @@ function initModules() {
 	*/
 
 	//Iterate over all packages
-	for(let package in package_lock.package) {
-		
+	for(let p in packages) {
+		let tmpPackage = packages[p];
+		if(tmpPackage.engines != undefined && tmpPackage.engines.livestudio != undefined && tmpPackage.engines.livestudio == true) {
+			console.log(path.join(__dirname, "..", "..", p));
+			Internal.Module.addRegistryPath(path.join(__dirname, "..", "..", p));
+		}
 	}
 }
 
