@@ -11,6 +11,7 @@
 if(require.main === module) {
 	const { app, BrowserWindow, dialog, globalShortcut, ipcMain } = require("electron");
 	const path = require("path");
+
 	const { Core } = require('./src/LiveStudio/LiveStudio.js');
 
 	function createWindow() {
@@ -26,7 +27,8 @@ if(require.main === module) {
 				contextIsolation: false //New as of Electron 12. Since local code is used, there would be a larger problem if this was needed. I assume this is for something like Discord which could use the actual Discord web app inside the Electron app.
 			},
 			icon: "static/assets/square_logo-64.png",
-			center: true
+			center: true,
+			
 		});
 	
 		//Setup window
@@ -35,9 +37,11 @@ if(require.main === module) {
 		win.maximize();
 	
 		//Open developer tools with the proper argument
-		if(process.argv.indexOf("--debug") >= 0 || process.argv.indexOf("-d") >= 0)
+		if(process.argv.indexOf("--debug") >= 0 || process.argv.indexOf("-d") >= 0) {
 			win.webContents.openDevTools();
-	
+			win.minimize();
+		}
+		
 		return win;
 	}
 

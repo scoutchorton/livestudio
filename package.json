@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "electron .",
-		"debug": "electron . --debug",
+		"debug": "electron --trace-warnings . --debug",
 		"build": "npm run sass && electron-rebuild",
 		"sass": "sass static/sass/:static/styles/ -s compressed --update",
 		"sass-watch": "sass static/sass/:static/styles/ -s compressed --update --watch --poll",
@@ -22,6 +22,7 @@
 		"electron": "^13.2.3",
 		"electron-packager": "^15.3.0",
 		"electron-rebuild": "^2.3.5",
+		"pacote": "^11.3.5",
 		"sass": "^1.37.5"
 	},
 	"engines": {

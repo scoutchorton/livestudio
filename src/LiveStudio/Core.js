@@ -6,22 +6,28 @@
  * @module LiveStudio/Core
  */
 
-const Internal = require("./Internal.js");
 const path = require("path");
+
+const Internal = require("./Internal.js");
 
 
 
 /**
  * Initalize all modules
+ * @async
+ * 
  * @returns { undefined }
  */
-function initModules() {
+async function initModules() {
 	console.log("Initalizing modules...");
+
+	//Make sure folders exist
+	await Internal.File.generateStructure();
 
 	//Directories
 	//console.log(`Processing ${path.join(__dirname, "..", "..", "node_modules", ".package-lock.json")}`);
-	let package_lock = require(path.join(__dirname, "..", "..", "node_modules", ".package-lock.json"));
-	let packages = package_lock.packages;
+	//let package_lock = require(path.join(__dirname, "..", "..", "node_modules", ".package-lock.json"));
+	//let packages = package_lock.packages;
 	//let baseDir = path.join(__dirname, "..", "..");
 	//let packageDirs = Object.keys(package_lock.packages);
 	//let fullPackageDirs = packageDirs.map(p => { return baseDir + "/" + p});
@@ -48,17 +54,25 @@ function initModules() {
 	*/
 
 	//Iterate over all packages
-	for(let p in packages) {
-		let tmpPackage = packages[p];
+	/*
+	for(let pkg in packages) {
+		let tmpPackage = packages[pkg];
 		if(tmpPackage.engines != undefined && tmpPackage.engines.livestudio != undefined && tmpPackage.engines.livestudio == true) {
-			console.log(path.join(__dirname, "..", "..", p));
-			Internal.Module.addRegistryPath(path.join(__dirname, "..", "..", p));
+			console.log(path.join(__dirname, "..", "..", pkg));
+			Internal.Module.addRegistryPath(path.join(__dirname, "..", "..", pkg));
 		}
+	}
+	*/
+
+	/** @todo Work with new package manager */
+
+	//Iterate over all packages
+	let modules = require(Internal.File.paths.files.modules);
+	for(let mod in modules) {
+		console.log(`  Initalizing module ${mod}...`);
 	}
 }
 
 
 
-module.exports = {
-	initModules: initModules
-}
+module.exports = {initModules}

@@ -37,7 +37,4 @@ async function registerPane(settings) {
  * Exports
  */
 
-module.exports = {
-	registerStatusbar: registerStatusbar,
-	registerPane: registerPane,
-}
+module.exports = {registerStatusbar, registerPane}
