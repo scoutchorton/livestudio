@@ -111,7 +111,10 @@ async function remove(pkg) {
 
 	//Remove module folder
 	try {
-		fs.rm(path.join(Internal.File.paths.folders.modules, pkg), {recursive: true, force: true});
+		if(fs.rm)
+			fs.rm(path.join(Internal.File.paths.folders.modules, pkg), {recursive: true, force: true});
+		else
+			fs.rmdir(path.join(Internal.File.paths.folders.modules, pkg), {recursive: true});
 	} catch(err) {
 		clear();
 		process.stderr.write(`\rCould not remove ${pkg}\n`);
