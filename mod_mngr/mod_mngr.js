@@ -46,12 +46,15 @@ __modules_file = {
 
 
 
-async function install(pkg) {
+async function install(pkg, installDir) {
 	let clear;
 	let manifest;
 	let modulePath;
 	let result;
 	let moduleData;
+
+	//Set default value of installDir to modules directory
+	installDir = installDir || Internal.File.paths.folders.modules;
 
 	//Find package
 	clear = loadingMessage(`Resolving ${pkg}...`);
@@ -78,7 +81,7 @@ async function install(pkg) {
 	clear = loadingMessage(`Extracting ${pkg}...`);
 
 	try {
-		modulePath = path.join(Internal.File.paths.folders.modules, manifest.name);
+		modulePath = path.join(installDir, manifest.name);
 		result = await pacote.extract(pkg, modulePath);
 	} catch(err) {
 		//TODO: make a more verbose output
@@ -93,7 +96,19 @@ async function install(pkg) {
 
 	//Update modules.json
 	__modules_file.add(manifest.name, manifest);
+	
 	process.stdout.write(`Installed ${manifest.name}@${manifest.version}\n`);
+	return manifest;
+}
+
+async function installSubmodules(pkg) {
+	let clear;
+	let packageData;
+
+	//Get package data
+	try {
+		//packageData = require(path.join(Internal.File.paths.folders.modules, pkg, ));
+	}
 }
 
 async function remove(pkg) {
@@ -157,7 +172,7 @@ function find_arg(argv, args, positional) {
 //Only run when being executed
 if(require.main === module) {(async function() {
 	let args = process.argv.slice(2);
-	let clear;
+	let moduleData;
 
 	//Generate file structure
 	await Internal.File.generateStructure();
@@ -166,7 +181,8 @@ if(require.main === module) {(async function() {
 	if(find_arg(args, ["install", "i"]).length > 0) {
 		//Check if install command was at the end
 		if(find_arg(args, ["install", "i"], true).indexOf(args.length - 1) === -1) {
-			await install(args.slice(-1)[0]);
+			moduleData = await install(args.slice(-1)[0]);
+			for(let submodule in )
 		} else {
 			console.error("No package given");
 			process.exit(1);
