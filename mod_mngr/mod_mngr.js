@@ -2,6 +2,7 @@ const fs = require("fs").promises;
 const { constants } = require("fs");
 const os = require("os");
 const pacote = require("pacote");
+const PackageJson = require('@npmcli/package-json');
 const path = require("path");
 
 const { Internal } = require("../src/LiveStudio/LiveStudio.js");
@@ -52,6 +53,7 @@ async function install(pkg, installDir) {
 	let modulePath;
 	let result;
 	let moduleData;
+	let package;
 
 	//Set default value of installDir to modules directory
 	installDir = installDir || Internal.File.paths.folders.modules;
@@ -96,6 +98,14 @@ async function install(pkg, installDir) {
 
 	//Update modules.json
 	__modules_file.add(manifest.name, manifest);
+
+	//Prepare submodules
+	
+	//https://github.com/npm/package-json
+	//https://github.com/npm/cli/blob/latest/lib/npm.js
+	//https://github.com/npm/cli/blob/latest/lib/install.js
+	//https://github.com/npm/run-script?
+	package = PackageJson(path.join(modulePath, ))
 	
 	process.stdout.write(`Installed ${manifest.name}@${manifest.version}\n`);
 	return manifest;
@@ -106,9 +116,11 @@ async function installSubmodules(pkg) {
 	let packageData;
 
 	//Get package data
+	/*
 	try {
 		//packageData = require(path.join(Internal.File.paths.folders.modules, pkg, ));
 	}
+	*/
 }
 
 async function remove(pkg) {
@@ -182,7 +194,8 @@ if(require.main === module) {(async function() {
 		//Check if install command was at the end
 		if(find_arg(args, ["install", "i"], true).indexOf(args.length - 1) === -1) {
 			moduleData = await install(args.slice(-1)[0]);
-			for(let submodule in )
+			console.log(moduleData);
+			//for(let submodule in )
 		} else {
 			console.error("No package given");
 			process.exit(1);
