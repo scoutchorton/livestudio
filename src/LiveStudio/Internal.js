@@ -103,9 +103,11 @@ async function generateStructure() {
 function addRegistry(name) {
 	let tmpModule;
 	try {
-		console.log(`[INFO]   Attempt to require ${name}`)
-		tmpModule = require(name);
-		console.log(`[INFO] Attempted to require ${name}`)
+		//console.log(`[INFO]   Attempt to require ${name}`);
+		console.log(`[INFO]   Attempt to require ${path.join(paths.folders.modules, name)}`);
+		tmpModule = require(path.join(paths.folders.modules, name));
+		//console.log(`[INFO] Attempted to require ${name}`, tmpModule);
+		console.log(`[INFO] Attempted to require ${path.join(paths.folders.modules, name)}`, tmpModule);
 	} catch(e) {
 		console.log(e);
 	}
@@ -120,8 +122,9 @@ function addRegistry(name) {
  * @returns {Object} Registered module data
  * @throws {RegistrationError} Throws when not able to find the specified module
  */
+/*
 function addRegistryPath(path) {
-	/** @todo Do stuff like validate path, maybe get main file from package.json or just require it or something? */
+	// @todo Do stuff like validate path, maybe get main file from package.json or just require it or something?
 
 	let tmpModule;
 	try {
@@ -133,6 +136,7 @@ function addRegistryPath(path) {
 	}
 	//throw new module.exports.Error.RegistrationError(`Could not find module at ${path}`);
 };
+*/
 
 
 /*    Error submodule    */
@@ -157,6 +161,6 @@ class RegistrationError extends Error {
  */
 module.exports = {
 	Error: {RegistrationError},
-	Module: {addRegistryPath, addRegistry},
+	Module: {addRegistry},
 	File: {generateStructure, paths}
 }
