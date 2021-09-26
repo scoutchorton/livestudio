@@ -1,5 +1,6 @@
 const fs = require("fs").promises;
 const { constants } = require("fs");
+const npm = require("npm");
 const os = require("os");
 const pacote = require("pacote");
 const PackageJson = require('@npmcli/package-json');
@@ -48,16 +49,16 @@ __modules_file = {
 
 
 async function install(pkg, installDir) {
-	let clear;
-	let manifest;
-	let modulePath;
-	let result;
-	let moduleData;
-	let package;
-
 	//Set default value of installDir to modules directory
-	installDir = installDir || Internal.File.paths.folders.modules;
+	installDir = installDir || Internal.File.paths.folders.data;
 
+	//Utilize npm library
+	//await npm.config.set("prefix", installDir);
+	//await npm.config.set("global", true)
+	//console.log(npm.config.get("prefix"));
+	await npm.commands.install([pkg, "--prefix", installDir, "--global"], () => {});
+
+	/*
 	//Find package
 	clear = loadingMessage(`Resolving ${pkg}...`);
 	
@@ -109,6 +110,7 @@ async function install(pkg, installDir) {
 	
 	process.stdout.write(`Installed ${manifest.name}@${manifest.version}\n`);
 	return manifest;
+	*/
 }
 
 async function installSubmodules(pkg) {
@@ -186,15 +188,18 @@ if(require.main === module) {(async function() {
 	let args = process.argv.slice(2);
 	let moduleData;
 
-	//Generate file structure
+	//Initialization
 	await Internal.File.generateStructure();
+	//await npm.config.load();
+	//console.log(npm.config.get("prefix"));
+	await npm.load();
 	
 	//Install?
 	if(find_arg(args, ["install", "i"]).length > 0) {
 		//Check if install command was at the end
 		if(find_arg(args, ["install", "i"], true).indexOf(args.length - 1) === -1) {
 			moduleData = await install(args.slice(-1)[0]);
-			console.log(moduleData);
+			//console.log(moduleData);
 			//for(let submodule in )
 		} else {
 			console.error("No package given");

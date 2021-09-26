@@ -31,12 +31,12 @@ let __data_dir = path.join((process.platform == "win32") ? process.env.APPDATA :
  */
 let paths = {
 	folders: {
-		data: __data_dir,
-		modules: path.join(__data_dir, "modules")
+		data: __data_dir
+		//modules: path.join(__data_dir, "modules")
 	},
 	files: {
 		settings: path.join(__data_dir, "settings.json"),
-		modules: path.join(__data_dir, "modules.json")
+		package: path.join(__data_dir, "package.json"),
 	}
 };
 
@@ -46,10 +46,13 @@ let paths = {
  * @async
  */
 async function generateStructure() {
+	let generated = [];
+
 	//Iterate over needed folders
 	for(let folder of Object.values(paths.folders)) {
 		try {
 			await fs.mkdir(folder);
+			generated.push(folder);
 		} catch(err) {
 			//Ignore if file exists
 			if(err.code == 'EEXIST')
@@ -65,6 +68,7 @@ async function generateStructure() {
 		let fh; //FileHandle
 		let fileData;
 
+		//Create file
 		try {
 			fh = await fs.open(file, "a");
 		} catch(err) {
@@ -86,6 +90,8 @@ async function generateStructure() {
 			throw err;
 		}
 	}
+
+	return generated;
 }
 
 
