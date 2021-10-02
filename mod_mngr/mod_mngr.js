@@ -10,159 +10,28 @@ const { Internal } = require("../src/LiveStudio/LiveStudio.js");
 
 
 
-function loadingMessage(msg) {
-	let state = 0;
-	let invtl = setInterval(() => {
-		let line = ["|", "/", "-", "\\"][state];
-
-		process.stdout.write(`\r${line} ${msg}`);
-
-		state++;
-		if(state > 3)
-			state = 0;
-	}, 100);
-	return () => {
-		process.stdout.write("\r" + " ".repeat(2 + msg.length));
-		clearInterval(invtl);
-	}
-}
-
-__modules_file = {
-	add: async (name, details) => {
-		moduleData = require(Internal.File.paths.files.modules);
-		moduleData[name] = details;
-		await fs.writeFile(Internal.File.paths.files.modules, JSON.stringify(moduleData, undefined, "\t"));
-		return moduleData;
-	},
-	remove: async (name) => {
-		moduleData = require(Internal.File.paths.files.modules);
-		delete moduleData[name];
-		await fs.writeFile(Internal.File.paths.files.modules, JSON.stringify(moduleData, undefined, "\t"));
-		return moduleData;
-	},
-	has: async (name) => {
-		moduleData = require(Internal.File.paths.files.modules);
-		return Object.keys(moduleData).indexOf(name) === -1 ? false : true;
-	}
-}
-
-
+/*
+ * Package management
+ */
 
 async function install(pkg, installDir) {
-	//Set default value of installDir to modules directory
-	installDir = installDir || Internal.File.paths.folders.data;
+	/**
+	 * @todo: consult pacote for metadata to determine if the module is for livestudio or not
+	 */
 
-	//Utilize npm library
-	//await npm.config.set("prefix", installDir);
-	//await npm.config.set("global", true)
-	//console.log(npm.config.get("prefix"));
-	await npm.commands.install([pkg, "--prefix", installDir, "--global"], () => {});
-
-	/*
-	//Find package
-	clear = loadingMessage(`Resolving ${pkg}...`);
-	
-	try {
-		manifest = await pacote.manifest(pkg);
-	} catch(err) {
-		//TODO: make a more verbose output
-		clear();
-		process.stderr.write(`\rCould not resolve ${pkg}\n`);
-		console.log(err);
-		process.exit(1);
-	}
-	clear();
-
-	if(manifest) {
-		process.stdout.write(`\rResolved ${manifest.name}\n`);
-	} else {
-		process.stderr.write(`\rCould not resolve ${pkg}\n`);
-		process.exit(1);
-	}
-
-	//Extract package
-	clear = loadingMessage(`Extracting ${pkg}...`);
-
-	try {
-		modulePath = path.join(installDir, manifest.name);
-		result = await pacote.extract(pkg, modulePath);
-	} catch(err) {
-		//TODO: make a more verbose output
-		clear();
-		process.stderr.write(`\rCould not extract ${manifest.name}\n`);
-		console.log(err);
-		process.exit(1);
-	}
-	clear();
-
-	process.stdout.write(`\rExtracted ${manifest.name} to ${modulePath}\n`);
-
-	//Update modules.json
-	__modules_file.add(manifest.name, manifest);
-
-	//Prepare submodules
-	
-	//https://github.com/npm/package-json
-	//https://github.com/npm/cli/blob/latest/lib/npm.js
-	//https://github.com/npm/cli/blob/latest/lib/install.js
-	//https://github.com/npm/run-script?
-	package = PackageJson(path.join(modulePath, ))
-	
-	process.stdout.write(`Installed ${manifest.name}@${manifest.version}\n`);
-	return manifest;
-	*/
+	//Install via npm
+	npm.prefix = installDir || Internal.File.paths.folders.data;
+	await npm.commands.install([pkg], () => {});
 }
 
-async function installSubmodules(pkg) {
-	let clear;
-	let packageData;
-
-	//Get package data
-	/*
-	try {
-		//packageData = require(path.join(Internal.File.paths.folders.modules, pkg, ));
-	}
-	*/
+async function remove(pkg, installDir) {
+	//Remove via npm
+	npm.prefix = installDir || Internal.File.paths.folders.data;
+	await npm.commands.uninstall([pkg], () => {});
 }
 
-async function remove(pkg) {
-	let clear;
-
-	//Check if module exists
-	clear = loadingMessage(`Removing ${pkg}...`);
-
-	try {
-		await fs.access(path.join(Internal.File.paths.folders.modules, pkg))
-	} catch(err) {
-		process.stderr.write(`\r${pkg} not installed\n`);
-		process.exit(1);
-	}
-
-	//Remove module folder
-	try {
-		if(fs.rm)
-			fs.rm(path.join(Internal.File.paths.folders.modules, pkg), {recursive: true, force: true});
-		else
-			fs.rmdir(path.join(Internal.File.paths.folders.modules, pkg), {recursive: true});
-	} catch(err) {
-		clear();
-		process.stderr.write(`\rCould not remove ${pkg}\n`);
-		console.log(err);
-		process.exit(1);
-	}
-	
-	//Update modules.json
-	__modules_file.remove(pkg);
-	clear();
-	
-	process.stdout.write(`\rRemoved ${pkg}\n`);
-}
-
-
-
-/**
- * @todo Better error messages
- * @todo Make a devoted function to managing modules.json (__modules_file)
+/*
+ * User management
  */
 
 function find_arg(argv, args, positional) {
@@ -186,21 +55,16 @@ function find_arg(argv, args, positional) {
 //Only run when being executed
 if(require.main === module) {(async function() {
 	let args = process.argv.slice(2);
-	let moduleData;
 
 	//Initialization
 	await Internal.File.generateStructure();
-	//await npm.config.load();
-	//console.log(npm.config.get("prefix"));
 	await npm.load();
-	
+
 	//Install?
-	if(find_arg(args, ["install", "i"]).length > 0) {
+	if(find_arg(args, ["install", "i", "update", "u"]).length > 0) {
 		//Check if install command was at the end
-		if(find_arg(args, ["install", "i"], true).indexOf(args.length - 1) === -1) {
-			moduleData = await install(args.slice(-1)[0]);
-			//console.log(moduleData);
-			//for(let submodule in )
+		if(find_arg(args, ["install", "i", "update", "u"], true).indexOf(args.length - 1) === -1) {
+			await install(args.slice(-1)[0]);
 		} else {
 			console.error("No package given");
 			process.exit(1);
