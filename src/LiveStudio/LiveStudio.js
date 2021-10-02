@@ -5,7 +5,7 @@
  */
 
 module.exports = {
-	Core: require("./Core.js"),
-	GUI: require("./GUI.js"),
-	Internal: require("./Internal.js")
+	Core: require("./Core/Core.js"),
+	GUI: require("./GUI/GUI.js"),
+	Internal: require("./Internal/Internal.js")
 }

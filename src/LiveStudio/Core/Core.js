@@ -8,7 +8,7 @@
 
 const path = require("path");
 
-const Internal = require("./Internal.js");
+const Internal = require("../Internal/Internal.js");
 
 
 
@@ -25,12 +25,16 @@ async function initModules() {
 	await Internal.File.generateStructure();
 
 	//Iterate over all packages
-	let modules = require(Internal.File.paths.files.modules);
+	let modules = require(Internal.File.paths.files.package).dependencies;
+	console.log(modules);
 	for(let mod in modules) {
+		console.log(`module: ${mod}`)
 		Internal.Module.addRegistry(mod);
 	}
 }
 
 
 
-module.exports = {initModules}
+module.exports = {
+	initModules
+}
