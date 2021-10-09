@@ -1,4 +1,4 @@
-# ![LiveStudio Logo](./static/assets/black-logo-64.png)
+# LiveStudio
 
 # Installing
 ## Installing the Studio
