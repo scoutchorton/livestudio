@@ -28,9 +28,10 @@ async function initModules() {
 	let modules = require(Internal.File.paths.files.package).dependencies;
 	console.log(modules);
 	for(let mod in modules) {
-		console.log(`module: ${mod}`)
 		Internal.Module.addRegistry(mod);
 	}
+
+	return;
 }
 
 

@@ -3,7 +3,7 @@ const { constants } = require("fs");
 const npm = require("npm");
 const os = require("os");
 const pacote = require("pacote");
-const PackageJson = require('@npmcli/package-json');
+//const PackageJson = require('@npmcli/package-json');
 const path = require("path");
 
 const { Internal } = require("../src/LiveStudio/LiveStudio.js");

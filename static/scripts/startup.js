@@ -7,9 +7,12 @@
 	const { ipcRenderer } = require("electron");
 
 	//Wait until page finishes loading and start initalization
-	window.addEventListener("load", () => {
-		ipcRenderer.send("PageLoad"); //Let LiveStudio handle 
-		//document.getElementById("preload").classList.add("hidden"); //Move to once all modules are loaded
+	window.addEventListener("load", async () => {
+		res = await ipcRenderer.invoke("PageLoad");
+		if(res)
+			document.getElementById("preload").classList.add("hidden");
+		else
+			alert("Unable to load LiveStudio! Please restart the application.");
 	});
 })();
 

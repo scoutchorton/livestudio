@@ -6,6 +6,8 @@
  * @module GUI
  */
 
+const { BrowserWindow } = require("electron");
+
 
 
 /**
@@ -18,7 +20,16 @@
  * @param {Array} settings.menu Items for the context menu
  */
 async function registerStatusbar(settings) {
-	return true;
+	let win = BrowserWindow.getFocusedWindow();
+
+	//Check if a window was found
+	if(win === null)
+		throw Error("Could not get BrowserWindow."); //Move to a new error class
+
+	console.log(settings, win);
+	win.webContents.send("AddStatusbar", settings);
+
+	return null;
 }
 
 /**
@@ -29,7 +40,16 @@ async function registerStatusbar(settings) {
  * @returns Pane object
  */
 async function registerPane(settings) {
-	return {};
+	let win = BrowserWindow.getFocusedWindow();
+
+	//Check if a window was found
+	if(win === null)
+		throw Error("Could not get BrowserWindow."); //Move to a new error class
+
+	console.log(settings, win);
+	win.webContents.send("RegisterPane", settings);
+
+	return null;
 }
 
 

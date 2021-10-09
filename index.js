@@ -26,7 +26,7 @@ if(require.main === module) {
 				devTools: true,
 				contextIsolation: false //New as of Electron 12. Since local code is used, there would be a larger problem if this was needed. I assume this is for something like Discord which could use the actual Discord web app inside the Electron app.
 			},
-			icon: "static/assets/square_logo-64.png",
+			icon: "static/assets/white-square-logo-64.png",
 			center: true,
 			
 		});
@@ -62,9 +62,10 @@ if(require.main === module) {
 	});
 
 	//Initalization listener
-	ipcMain.on("PageLoad", async (e) => {
+	ipcMain.handle("PageLoad", async (e) => {
 		console.log("Page loaded. Starting to load modules...");
 		Core.initModules();
+		return true;
 	});
 /*
  * Export when not running as an app

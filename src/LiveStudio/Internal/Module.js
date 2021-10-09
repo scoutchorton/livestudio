@@ -7,7 +7,7 @@
  */
 const path = require("path");
 
-const {paths} = require("./File.js");
+const { paths } = require("./File.js");
 const Error = require("./Error.js");
 
 
