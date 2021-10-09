@@ -1,9 +1,23 @@
 {
 	"opts": {
 		"destination": "docs/",
-		"recurse": true
+		"recurse": true,
+		"template": "node_modules/tui-jsdoc-template"
 	},
 	"plugins": [
 		"plugins/markdown"
-	]
+	],
+	"templates": {
+		"default": {
+			"staticFiles": {
+				"include": ["static/assets/white-logo.svg"]
+			}
+		},
+		"logo": {
+			"url": "white-logo.svg",
+			"link": "https://github.com/scoutchorton/livestudio"
+		},
+		"useCollapsibles": true,
+		"footerText": "<a href=\"https://github.com/scoutchorton/livestudio\"><code>npm i scoutchorton/livestudio</code></a>"
+	}
 }

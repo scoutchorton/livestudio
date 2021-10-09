@@ -3,7 +3,7 @@
  * @desc Internal functions not intended for module developers to use
  * @author scoutchorton
  * 
- * @module LiveStudio/Internal
+ * @module Internal
  */
 
 const fs = require("fs").promises;

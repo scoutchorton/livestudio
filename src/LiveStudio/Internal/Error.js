@@ -3,12 +3,11 @@
  * @desc Internal Errors
  * @author scoutchorton
  * 
- * @module LiveStudio/Internal/Error
+ * @module Internal/Error
  */
 
 /**
  * Issues with registering a module
- * @module LiveStudio/Internal/Error
  * @extends Error
  */
 class RegistrationError extends Error {

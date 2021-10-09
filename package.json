@@ -16,16 +16,16 @@
 	"author": "scoutchorton",
 	"license": "ISC",
 	"dependencies": {
-		"@npmcli/package-json": "^1.0.1",
-		"npm": "^7.22.0",
-		"vue": "^2.6.14"
+		"npm": "^7.22.0"
 	},
 	"devDependencies": {
 		"electron": "^13.2.3",
 		"electron-packager": "^15.3.0",
 		"electron-rebuild": "^2.3.5",
 		"pacote": "^11.3.5",
-		"sass": "^1.37.5"
+		"sass": "^1.37.5",
+		"tui-jsdoc-template": "^1.2.2",
+		"vue": "^2.6.14"
 	},
 	"engines": {
 		"electron": true

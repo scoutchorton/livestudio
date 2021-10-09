@@ -3,7 +3,7 @@
  * @desc Internal module management functions
  * @author scoutchorton
  * 
- * @module LiveStudio/Internal/Module
+ * @module Internal/Module
  */
 const path = require("path");
 
@@ -26,15 +26,11 @@ var module_cache = {};
  */
 function addRegistry(name) {
 	let mod;
+
+	//Attempt to get module
 	try {
-		//console.log(`[INFO]   Attempt to require ${name}`);
-		console.log(`[INFO]   Attempt to require ${path.join(paths.folders.modules, name)}`);
 		mod = require(path.join(paths.folders.modules, name));
-		//console.log(`[INFO] Attempted to require ${name}`, tmpModule);
-		console.log(`[INFO] Attempted to require ${path.join(paths.folders.modules, name)}`, mod);
-		console.log(modData)
 	} catch(e) {
-		console.log(e);
 		throw new Error.RegistrationError(`Could not find module at ${path}`);
 	}
 

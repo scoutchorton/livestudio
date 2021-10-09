@@ -3,7 +3,7 @@
  * @desc Internal file management functions
  * @author scoutchorton
  * 
- * @module LiveStudio/Internal/File
+ * @module Internal/File
  */
 const fs = require("fs").promises;
 const path = require("path");
