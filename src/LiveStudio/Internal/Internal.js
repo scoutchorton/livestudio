@@ -9,11 +9,6 @@
 const fs = require("fs").promises;
 const path = require("path");
 
-/*
- * Internal variables 
- */
-var module_cache = {};
-
 
 
 module.exports = {

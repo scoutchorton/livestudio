@@ -7,7 +7,16 @@
  */
 const path = require("path");
 
-const {paths} = require("./File.js")
+const {paths} = require("./File.js");
+const Error = require("./Error.js");
+
+
+/*
+ * Internal variables 
+ */
+var module_cache = {};
+
+
 
 /**
  * Load a module into the LiveStudio system
@@ -16,17 +25,25 @@ const {paths} = require("./File.js")
  * @throws {RegistrationError} Throws when not able to find the specified module
  */
 function addRegistry(name) {
-	let tmpModule;
+	let mod;
 	try {
 		//console.log(`[INFO]   Attempt to require ${name}`);
 		console.log(`[INFO]   Attempt to require ${path.join(paths.folders.modules, name)}`);
-		tmpModule = require(path.join(paths.folders.modules, name));
+		mod = require(path.join(paths.folders.modules, name));
 		//console.log(`[INFO] Attempted to require ${name}`, tmpModule);
-		console.log(`[INFO] Attempted to require ${path.join(paths.folders.modules, name)}`, tmpModule);
+		console.log(`[INFO] Attempted to require ${path.join(paths.folders.modules, name)}`, mod);
+		console.log(modData)
 	} catch(e) {
 		console.log(e);
+		throw new Error.RegistrationError(`Could not find module at ${path}`);
 	}
-	//throw new module.exports.Error.RegistrationError(`Could not find module at ${path}`);
+
+	//Go through registration (add more stages like with npm?)
+	if(mod.register)
+		mod.register();
+
+	//Add module to registry
+	module_cache[name] = mod;
 };
 
 /**
