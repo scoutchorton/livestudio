@@ -20,7 +20,7 @@ const { BrowserWindow } = require("electron");
  * @param {Array} settings.menu Items for the context menu
  */
 async function registerStatusbar(settings) {
-	let win = BrowserWindow.getFocusedWindow();
+	let win = BrowserWindow.getAllWindows()[0];
 
 	//Check if a window was found
 	if(win === null)
@@ -40,7 +40,7 @@ async function registerStatusbar(settings) {
  * @returns Pane object
  */
 async function registerPane(settings) {
-	let win = BrowserWindow.getFocusedWindow();
+	let win = BrowserWindow.getAllWindows()[0];
 
 	//Check if a window was found
 	if(win === null)
