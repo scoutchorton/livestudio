@@ -8,7 +8,13 @@
 
 	//Wait until page finishes loading and start initalization
 	window.addEventListener("load", async () => {
+		//Initalize frontend
+		initStatusbar();
+
+		//Initalize backend
 		res = await ipcRenderer.invoke("PageLoad");
+
+		//Complete loading
 		if(res)
 			document.getElementById("preload").classList.add("hidden");
 		else

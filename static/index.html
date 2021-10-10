@@ -43,8 +43,11 @@
 		<!-- Page data -->
 		<!--------------->
 
-		<!--
 		<div id="statusbar">
+			<div v-for="module in modules">
+				<img v-bind:src="module.iconURL" v-bind:alt="module.name" v-bind:title="module.name">
+			</div>
+			<!--
 			<div v-for="device in devices" v-bind:class="device.state === 2 ? 'live' : device.state === 1 ? 'connecting' : 'inactive'" v-bind:name="device.name" v-on:click.right="contextMenu = (contextMenu == -1) ? devices.indexOf(device) : -1">
 				<img v-bind:src="device.iconURL" v-bind:alt="device.name" v-bind:title="device.name"/>
 				<div></div>
@@ -55,8 +58,8 @@
 					</li>
 				</ul>
 			</div>
+			-->
 		</div>
-		-->
 
 		<!--------------->
 		<!-- Templates -->
@@ -82,8 +85,9 @@
 		<!-- Scripts -->
 		<!------------->
 
-		<script src="scripts/startup.js"></script>
-		<script src="scripts/scripts.js"></script>
+		<script src="scripts/statusbar.js"></script>
 		<script src="scripts/LiveStudio.js"></script>
+		<script src="scripts/scripts.js"></script>
+		<script src="scripts/startup.js"></script>
 	</body>
 </html>
