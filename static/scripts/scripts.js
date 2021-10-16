@@ -1,6 +1,11 @@
-/*
- * Input handling
+/**
+ * @file scripts.js
+ * @desc Misc JavaScript initalizations
+ * @author scoutchorton
+ * @ignore
  */
+
+//Handy event handling
 document.addEventListener("keyup", e => {
 	//Close window prompt
 	if((e.code === "KeyW" && e.ctrlKey) || (e.code === "KeyQ" && e.ctrlKey)) {

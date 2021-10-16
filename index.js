@@ -28,20 +28,17 @@ if(require.main === module) {
 			},
 			icon: "static/assets/white-square-logo-64.png",
 			center: true,
-			
 		});
-	
+		
 		//Setup window
 		win.loadFile(path.join(app.getAppPath(), "static/index.html"));
 		win.setMenu(null);
 		win.maximize();
-	
-		//Open developer tools with the proper argument
-		if(process.argv.indexOf("--debug") >= 0 || process.argv.indexOf("-d") >= 0) {
+
+		//Open developer tools with the proper environment variable
+		if(process.env.NODE_ENV == "development")
 			win.webContents.openDevTools();
-			win.minimize();
-		}
-		
+
 		return win;
 	}
 

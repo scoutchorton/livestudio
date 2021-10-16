@@ -5,15 +5,22 @@
  * @ignore
  */
 
-function initStatusbar() {
-	window.statusbar = new Vue({
-		el: "#statusbar",
-		data: () => {
-			return {
-				modules: {}
-			}
-		}
-	});
-	
-	return statusbar
-}
+//Wait until page finishes loading
+Vue.component("statusbar", {
+	template: getTemplate("statusbar"),
+	data: () => {
+		return {
+			modules: {}
+		};
+	}
+});
+
+Vue.component("statusbar-module", {
+	template: getTemplate("statusbar-module"),
+	props: {
+		options: Object
+	},
+	data: () => {
+		return {};
+	}
+});

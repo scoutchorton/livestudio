@@ -1,25 +1,27 @@
 /**
  * @file startup.js
  * @desc Handle client-side startup functions for LiveStudio
+ * @author scoutchorton
+ * @ignore
  */
 
-(() => {
+(async () => {
 	const { ipcRenderer } = require("electron");
-
-	//Wait until page finishes loading and start initalization
-	window.addEventListener("load", async () => {
-		//Initalize frontend
-		initStatusbar();
-
-		//Initalize backend
-		res = await ipcRenderer.invoke("PageLoad");
-
-		//Complete loading
-		if(res)
-			document.getElementById("preload").classList.add("hidden");
-		else
-			alert("Unable to load LiveStudio! Please restart the application.");
+		
+	//Initalize frontend
+	//loadTemplateCache();
+	window.app = new Vue({
+		el: document.querySelector("#page-data")
 	});
+
+	//Initalize backend
+	res = await ipcRenderer.invoke("PageLoad");
+
+	//Complete loading
+	if(res)
+		document.getElementById("preload").classList.add("hidden");
+	else
+		alert("Unable to load LiveStudio! Please restart the application.");
 })();
 
 

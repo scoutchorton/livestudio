@@ -18,9 +18,14 @@
 		<!------------->
 		<!-- Scripts -->
 		<!------------->
-
+		
 		<script src="../node_modules/vue/dist/vue.js"></script>
-		<!--<script src="scripts/panekit.js"></script>-->
+		
+		<script src="scripts/scripts.js" defer></script>
+		<script src="scripts/LiveStudio.js" defer></script>
+		<script src="scripts/statusbar.js" defer></script>
+		<!--<script src="scripts/panekit.js" defer></script>-->
+		<script src="scripts/startup.js" defer></script>
 
 		<!-------------->
 		<!-- Metadata -->
@@ -43,9 +48,17 @@
 		<!-- Page data -->
 		<!--------------->
 
-		<div id="statusbar">
-			<div v-for="module in modules">
-				<img v-bind:src="module.iconURL" v-bind:alt="module.name" v-bind:title="module.name">
+		<div id="page-data">
+			<statusbar ref="statusbar"></statusbar>
+		</div>
+
+		<!--------------->
+		<!-- Templates -->
+		<!--------------->
+
+		<template id="statusbar">
+			<div id="statusbar">
+				<statusbar-module v-for="module in modules" v-bind:options="module"></statusbar-module>
 			</div>
 			<!--
 			<div v-for="device in devices" v-bind:class="device.state === 2 ? 'live' : device.state === 1 ? 'connecting' : 'inactive'" v-bind:name="device.name" v-on:click.right="contextMenu = (contextMenu == -1) ? devices.indexOf(device) : -1">
@@ -59,11 +72,13 @@
 				</ul>
 			</div>
 			-->
-		</div>
-
-		<!--------------->
-		<!-- Templates -->
-		<!--------------->
+		</template>
+		<template id="statusbar-module">
+			<div class="module-container">
+				<!--<img v-bind:src="module.iconURL" v-bind:alt="module.name" v-bind:title="module.name">-->
+				<span>{{JSON.stringify(options)}}</span>
+			</div>
+		</template>
 
 		<!--
 		<template id="tmpl-Pane">
@@ -80,14 +95,5 @@
 			</div>
 		</template>
 		-->
-
-		<!------------->
-		<!-- Scripts -->
-		<!------------->
-
-		<script src="scripts/statusbar.js"></script>
-		<script src="scripts/LiveStudio.js"></script>
-		<script src="scripts/scripts.js"></script>
-		<script src="scripts/startup.js"></script>
 	</body>
 </html>
