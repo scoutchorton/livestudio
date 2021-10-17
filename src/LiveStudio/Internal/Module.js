@@ -19,24 +19,51 @@ var module_cache = {};
 
 
 /**
+ * @class Module
+ */
+class LS_Module {
+	/**
+	 * @param {Object} mod_pkg package.json from the module
+	 * @param {String} mod_path Path to module
+	 */
+	constructor(mod_pkg, mod_path) {
+		this.__req = mod_pkg;
+		this.base_dir = mod_path; /** @member {String} base_dir Path to module base directory */
+		this.name = mod_pkg.name; /** @member {String} name Module name */
+	}
+
+	/**
+	 * @func url
+	 * @param {String} pth Path to be processed
+	 * @returns {String} Absolute path to resource
+	 */
+	url(pth) {
+		return path.join(this.base_dir, pth);
+	}
+}
+
+/**
  * Load a module into the LiveStudio system
  * @param {String} name Name of package
  * @returns {Object} Registered module data
  * @throws {RegistrationError} Throws when not able to find the specified module
  */
 function addRegistry(name) {
+	let mod_path = path.join(paths.folders.modules, name);
+	let mod_req;
 	let mod;
 
 	//Attempt to get module
 	try {
-		mod = require(path.join(paths.folders.modules, name));
+		mod_req = require(mod_path);
 	} catch(e) {
-		throw new Error.RegistrationError(`Could not find module at ${path}`);
+		throw new Error.RegistrationError(`Could not find module at ${mod_path}`);
 	}
+	mod = new LS_Module(mod_req, mod_path);
 
 	//Go through registration (add more stages like with npm?)
-	if(mod.register)
-		mod.register();
+	if(mod_req.register)
+		mod_req.register(mod);
 
 	//Add module to registry
 	module_cache[name] = mod;
@@ -66,5 +93,6 @@ function addRegistryPath(modulePath) {
 
 
 module.exports = {
+	Module: LS_Module,
 	addRegistry
 }

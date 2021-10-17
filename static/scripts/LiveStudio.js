@@ -11,12 +11,15 @@
 const { ipcRenderer, app } = require("electron");
 
 ipcRenderer.on("AddStatusbar", (event, data) => {
+	/*
 	console.log("AddStatusbar");
 	console.log(data);
 	console.log(window.app);
 	console.log(window.app.$refs.statusbar);
 	console.log(window.app.$refs.statusbar.$data.modules);
-	//window.app.$refs.statusbar.modules[data.name] = data;
+	*/
+	
+	//Add data to Vue instance
 	Vue.set(window.app.$refs.statusbar.modules, data.name, data);
 });
 

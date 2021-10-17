@@ -60,6 +60,12 @@
 			<div id="statusbar">
 				<statusbar-module v-for="module in modules" v-bind:options="module"></statusbar-module>
 			</div>
+		</template>
+		<template id="statusbar-module">
+			<div class="module-container">
+				<img v-bind:src="options.iconURL" v-bind:alt="options.name" v-bind:title="options.name">
+				<pre>{{JSON.stringify(options, undefined, 2)}}</pre>
+			</div>
 			<!--
 			<div v-for="device in devices" v-bind:class="device.state === 2 ? 'live' : device.state === 1 ? 'connecting' : 'inactive'" v-bind:name="device.name" v-on:click.right="contextMenu = (contextMenu == -1) ? devices.indexOf(device) : -1">
 				<img v-bind:src="device.iconURL" v-bind:alt="device.name" v-bind:title="device.name"/>
@@ -72,12 +78,6 @@
 				</ul>
 			</div>
 			-->
-		</template>
-		<template id="statusbar-module">
-			<div class="module-container">
-				<!--<img v-bind:src="module.iconURL" v-bind:alt="module.name" v-bind:title="module.name">-->
-				<span>{{JSON.stringify(options)}}</span>
-			</div>
 		</template>
 
 		<!--
