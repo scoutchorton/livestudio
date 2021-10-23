@@ -18,7 +18,13 @@ document.addEventListener("keyup", e => {
 	}
 });
 
-
+//Custom context menu handler
+document.addEventListener("contextmenu", e => {
+	//Get first Vue instance and send contextMenu event
+	vm = e.path.map(ele => {return ele.__vue__ || undefined;}).filter(vm => {return vm !== undefined})[0];
+	if(vm != undefined)
+		vm.$emit("contextmenu");
+});
 
 
 

@@ -12,7 +12,7 @@
 
 		<!--<link href="styles/panekit.css" type="text/css" rel="stylesheet" />-->
 		<link href="styles/styles.css" type="text/css" rel="stylesheet" />
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
 		<!--<link href="../node_modules/material-design-icons/iconfont/material-icons.css" type="text/css" rel="stylesheet" />-->
 
 		<!------------->
@@ -24,6 +24,7 @@
 		<script src="scripts/scripts.js" defer></script>
 		<script src="scripts/LiveStudio.js" defer></script>
 		<script src="scripts/statusbar.js" defer></script>
+		<script src="scripts/icon.js" defer></script>
 		<!--<script src="scripts/panekit.js" defer></script>-->
 		<script src="scripts/startup.js" defer></script>
 
@@ -40,8 +41,8 @@
 		<!-------------------->
 
 		<div id="preload">
-			<img src="assets/black-logo.svg" class="logo" />
-			<img src="assets/loading.svg" />
+			<img src="assets/logo/black-logo.svg" class="logo" />
+			<img src="assets/interface/loading.svg" />
 		</div>
 
 		<!--------------->
@@ -64,7 +65,8 @@
 		<template id="statusbar-module">
 			<div class="module-container">
 				<img v-bind:src="options.iconURL" v-bind:alt="options.name" v-bind:title="options.name">
-				<pre>{{JSON.stringify(options, undefined, 2)}}</pre>
+				<icon module="interface" name="menu-lines"></icon>
+				<!--<pre>{{JSON.stringify(options, undefined, 2)}}</pre>-->
 			</div>
 			<!--
 			<div v-for="device in devices" v-bind:class="device.state === 2 ? 'live' : device.state === 1 ? 'connecting' : 'inactive'" v-bind:name="device.name" v-on:click.right="contextMenu = (contextMenu == -1) ? devices.indexOf(device) : -1">

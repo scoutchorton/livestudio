@@ -5,13 +5,17 @@
  * @ignore
  */
 
-//Wait until page finishes loading
 Vue.component("statusbar", {
 	template: getTemplate("statusbar"),
 	data: () => {
 		return {
 			modules: {}
 		};
+	},
+	methods: {
+		alert: args => {
+			window.alert(args);
+		}
 	}
 });
 
