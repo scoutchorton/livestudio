@@ -32,9 +32,14 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
+    "api/**/*.ts"
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "typedocOptions": {
+    "out": "docs/",
+    "entryPoints": ["api/LiveStudio.ts"]
+  }
 }
