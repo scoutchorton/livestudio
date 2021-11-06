@@ -1,16 +1,24 @@
-# LiveStudio
+# livestudio
 
-# Installing
-## Installing the Studio
-To install the standalone executable, view the releases section of the GitHub page (currently none exist) or install from source.
-```bash
-git clone https://github.com/scoutchorton/livestudio
-npm i
+## Project setup
+```
+npm install
 ```
 
-## Installing the Node.js module
-In the future, there will be a npm module available.
-There is also the option to install from the GitHub page.
-```bash
-npm i github:scoutchorton/livestudio
+### Compiles and hot-reloads for development
 ```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
