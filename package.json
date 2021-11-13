@@ -10,7 +10,8 @@
     "electron:serve": "vue-cli-service electron:serve",
     "gen-ico": "ffmpeg -i src/assets/logo/black-logo-square-256.png build/icons/icon.ico",
     "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps"
+    "postuninstall": "electron-builder install-app-deps",
+    "docs": "typedoc"
   },
   "main": "background.js",
   "dependencies": {
