@@ -8,9 +8,14 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { ipcRenderer } from "electron";
+import * as LiveStudio from "../api/LiveStudio";
 
 @Component({})
 export default class App extends Vue {
+	constructor() {
+		super();
+		LiveStudio.Internal.File.generateStrcuture();
+	}
 	/*
 	constructor() {
 		ipcRenderer.invoke("PageLoad").then();
