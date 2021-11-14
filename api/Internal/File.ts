@@ -40,7 +40,7 @@ export const paths = {
  * Generate required file and folder structure needed for LiveStudio
  * @async
  */
-export async function generateStrcuture():Promise<Array<string>> {
+export async function generateStructure():Promise<Array<string>> {
 	const generated:Array<string> = [];
 
 	//Iterate over needed folders

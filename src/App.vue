@@ -14,7 +14,7 @@ import * as LiveStudio from "../api/LiveStudio";
 export default class App extends Vue {
 	constructor() {
 		super();
-		LiveStudio.Internal.File.generateStrcuture();
+		LiveStudio.Internal.File.generateStructure();
 	}
 	/*
 	constructor() {
