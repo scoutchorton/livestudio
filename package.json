@@ -1,6 +1,8 @@
 {
   "name": "livestudio",
   "version": "0.1.0",
+  "description": "A software suite for managing audio/visual productions through a plugin based system.",
+  "author": "scoutchorton",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

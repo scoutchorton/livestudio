@@ -44,12 +44,13 @@ export class LS_Module {
 
 export function addRegistry(name:string):Record<string,unknown> {
 	const mod_path:string = path.join(paths.folders.modules, name);
-	let mod_req:LS_Required_Module;
+	let mod_req:any;
 	
 	//Attempt to get module
 	try {
-		mod_req = require(mod_path);
+		mod_req = import(mod_path);
 	} catch(err:unknown) {
+		console.error(err); 
 		throw new Errors.RegistrationError(`Could not find module at ${mod_path}`);
 	}
 	const ls_mod:LS_Module = new LS_Module(mod_req, mod_path);
