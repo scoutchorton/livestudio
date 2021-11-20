@@ -2,6 +2,12 @@
  * @module LiveStudio
  */
 
-export * as Core from "./Core/Core";
-export { default as Internal } from "./Internal/Internal";
-export * as GUI from"./GUI/GUI";
+import * as Core from "./Core/Core";
+import * as Internal from "./Internal/Internal";
+import * as GUI from"./GUI/GUI";
+
+export default {
+	Core,
+	Internal,
+	GUI
+}
