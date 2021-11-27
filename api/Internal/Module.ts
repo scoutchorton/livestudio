@@ -45,6 +45,10 @@ export class LS_Module {
 export function addRegistry(name:string):Record<string,unknown> {
 	const mod_path:string = path.join(paths.folders.modules, name);
 	let mod_req:any;
+
+	/**
+	 * @todo Import main file/index.js if none given. You can't just `import()` a directory, so the package should be parsed for the entrypoint.
+	 */
 	
 	//Attempt to get module
 	try {

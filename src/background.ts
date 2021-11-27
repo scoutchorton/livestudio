@@ -4,7 +4,7 @@ import "path";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 //import * as Backend from "./backend";
 
-import { default as LiveStudio } from "../api/LiveStudio"
+import * as LiveStudio from "../api/LiveStudio"
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -92,9 +92,4 @@ if(module.children.length === 0) {
 		LiveStudio.Core.initModules();
 		return true;
 	});
-}
-
-//Export module as default
-export default {
-	LiveStudio
 }
