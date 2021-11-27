@@ -3,7 +3,6 @@
  */
 
 import { promises as fs } from "fs";
-import { fstat } from "original-fs";
 import "path";
 
 import * as Internal from "../Internal/Internal"

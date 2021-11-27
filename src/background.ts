@@ -2,7 +2,9 @@ import { app, protocol, BrowserWindow, ipcMain } from "electron";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import "path";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
-import * as Backend from "./backend";
+//import * as Backend from "./backend";
+
+import { default as LiveStudio } from "../api/LiveStudio"
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -43,8 +45,6 @@ async function createWindow():Promise<BrowserWindow> {
 	return win;
 }
 
-console.log(require, module, require.main === module);
-
 //Run Electron if being required as main module
 if(module.children.length === 0) {
 	//Exit cleanly on request from parent process in development mode.
@@ -84,13 +84,17 @@ if(module.children.length === 0) {
 			createWindow();
 	});
 
-	//Assign ipc handlers
-	Backend.registerHandlers();
+	//IPC Handlers
+
+	//Load modules after the page loads
+	ipcMain.handle("PageLoad", async ():Promise<boolean> => {
+		console.log("Page loaded. Starting to load modules...");
+		LiveStudio.Core.initModules();
+		return true;
+	});
 }
 
-/*
-import * as LiveStudio from "../api/LiveStudio";
+//Export module as default
 export default {
 	LiveStudio
 }
-*/
