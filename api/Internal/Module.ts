@@ -41,10 +41,10 @@ export class LS_Module {
 			//Assign data to class
 			this.package_data = parsed_package_data;
 			this.name = this.package_data.name;
-			const module_path = path.join(this.base_dir, parsed_package_data.main || "index.js");
-			console.log(`Required file: ${module_path}`);
+			//const module_path = path.join(this.base_dir, parsed_package_data.main || "index.js");
+			//console.log(`Required file: ${module_path}`);
 			try {
-				const imported_module = await import(module_path);
+				const imported_module = await import(this.base_dir);
 				console.log(typeof(imported_module));
 			} catch(err:unknown) {
 				console.error("Could not load module");
