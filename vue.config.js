@@ -1,4 +1,7 @@
 module.exports = {
+	configureWebpack: {
+		target: "async-node"
+	},
 	pluginOptions: {
 		electronBuilder: {
 			nodeIntegration: true,

@@ -43,8 +43,18 @@ export class LS_Module {
 			this.name = this.package_data.name;
 			//const module_path = path.join(this.base_dir, parsed_package_data.main || "index.js");
 			//console.log(`Required file: ${module_path}`);
+			console.log(global);
 			try {
-				const imported_module = await import(this.base_dir);
+				console.log("Attempting to load base_dir");
+				const imported_module = await global.require(this.base_dir);
+				console.log(typeof(imported_module));
+			} catch(err:unknown) {
+				console.error("Could not load module");
+				console.error(err);
+			}
+			try {
+				console.log("Attempting to load index.js");
+				const imported_module = await global.require(path.join(this.base_dir, parsed_package_data.main || "index.js"));
 				console.log(typeof(imported_module));
 			} catch(err:unknown) {
 				console.error("Could not load module");
