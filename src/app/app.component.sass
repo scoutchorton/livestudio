@@ -1,14 +1,46 @@
-@import "../variables.sass"
+@use "../variables"
 	
-html, body
+/* Loading animation */
+@keyframes loading
+	0%
+		transform: rotate(0deg)
+	50%
+		transform: rotate(180deg)
+	100%
+		transform: rotate(360deg)
+
+#preload
 	display: flex
 	height: 100%
-	margin: 0
-	padding: 0
+	position: absolute
+	visibility: visible
 	width: 100%
+	z-index: 100
 
+	align-items: center
 	flex-direction: column
+	justify-content: center
+
+	background: variables.$charcoal
+	color: variables.$light-charcoal
+
+	transition: opacity 2s linear 0s, visibility 0s linear 2s
+
+	/* Logo and loading spiral */
+	img
+		height: 2.5em
+		margin: 1em
+		padding: 0.5em
+
+		background: variables.$light-charcoal
+
+	/* Just loading spiral */
+	img:not(.logo)
+		border-radius: 50%
+		animation: loading 1s linear 0s infinite normal none
 	
-	background: $charcoal
-	font-family: "Roboto", Arial, Helvetica, sans-serif
-	user-select: none
+	&.hidden
+		opacity: 0
+		visibility: hidden
+
+		transition: opacity 1.5s ease-out 0s, visibility 0s linear 1.5s
