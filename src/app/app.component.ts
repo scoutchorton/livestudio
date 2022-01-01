@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 //Third-party Angular libraries
 
 //Other imports
-import * as Electron from 'electron';
+import { ipcRenderer } from 'electron';
 
 @Component({
 	selector: 'app-root',
@@ -15,13 +15,9 @@ export class AppComponent implements OnInit {
 	title = 'livestudio';
 	loading = true;
 
-	ngOnInit(): void {
+	async ngOnInit(): Promise<void> {
 		console.log('Initialized AppComponent');
 		console.log('Initializing LiveStudio...');
-		Electron.ipcRenderer.send('PageLoad');
-
-		setTimeout(() => {
-			this.loading = false;
-		}, 5000);
+		await ipcRenderer.invoke('PageLoad');
 	}
 }

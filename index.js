@@ -1,6 +1,7 @@
-const { create } = require("domain");
-const { app, BrowserWindow } = require("electron");
-const path = require("path");
+import { app, BrowserWindow, ipcMain } from "electron";
+import * as path from "path";
+
+import * as LiveStudio from "./dist/api/LiveStudio";
 
 function createWindow() {
 	console.log("Creating window...");
@@ -41,4 +42,15 @@ app.on("activate", () => {
 app.whenReady().then(createWindow).catch(err => {
 	app.quit();
 	throw err;
+});
+
+/*
+ * IPC Handlers
+ */
+
+ipcMain.handle("PageLoad", async (e) => {
+	console.log("Page loaded!");
+
+	console.log("Loading modules...");
+	LiveStudio.Core.initModules();
 });

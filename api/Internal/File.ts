@@ -2,7 +2,7 @@
  * @module LiveStudio/Internal/File
  */
 
-import * as fs from "fs/promises";
+import { promises as fs } from "fs";
 import * as path from "path";
 
 interface FSError {
@@ -15,7 +15,7 @@ interface FSError {
 }
 
 //Internal variables
-const __home_dir:string = (process.platform == "win32") ? process.env.APPDATA as string : process.env.HOME as string;
+const __home_dir:string = (process.platform == "win32") ? process.env['APPDATA'] as string : process.env['HOME'] as string;
 const __data_dir:string = path.join((__home_dir as string), ".livestudio");
 
 /**

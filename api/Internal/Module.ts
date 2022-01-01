@@ -2,7 +2,7 @@
  * @module LiveStudio/Internal/Module
  */
 
-import * as fs from "fs/promises";
+import { promises as fs } from "fs";
 import * as path from "path";
 
 import { paths } from "./File";
@@ -25,7 +25,6 @@ export class LS_Module {
 	//private main_import;
 
 	/**
-	 * @param mod_pkg package.json from the module
 	 * @param mod_path Path to module
 	 */
 	constructor(mod_path:string) {
@@ -34,13 +33,13 @@ export class LS_Module {
 		this.base_dir = mod_path;
 
 		//Load module information
-		fs.readFile(path.join(mod_path, "package.json"), {encoding: "utf-8"}).then(async raw_package_data =>{
+		fs.readFile(path.join(mod_path, "package.json"), {encoding: "utf-8"}).then(async (raw_package_data: string) =>{
 			//Get package.json contents
 			const parsed_package_data = JSON.parse(raw_package_data);
 
 			//Assign data to class
 			this.package_data = parsed_package_data;
-			this.name = this.package_data.name;
+			this.name = this.package_data['name'];
 			//const module_path = path.join(this.base_dir, parsed_package_data.main || "index.js");
 			//console.log(`Required file: ${module_path}`);
 			console.log(global);
@@ -90,7 +89,6 @@ export function addRegistry(name:string):Record<string,unknown> {
 	
 	//Attempt to get module
 	try {
-		//mod_req = import(mod_path);
 		loaded_module = new LS_Module(mod_path);
 	} catch(err:unknown) {
 		console.error(err); 
@@ -103,6 +101,8 @@ export function addRegistry(name:string):Record<string,unknown> {
 	//	loaded_module.register();
 	//loaded_module.register(ls_mod);
 	
+	console.log(`${name} added to the module cache!`);
+
 	//Add module to registry
 	module_cache[name] = loaded_module;
 	return module_cache;
