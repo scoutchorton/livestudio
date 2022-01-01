@@ -9,7 +9,7 @@ import { paths } from "./File";
 import * as Errors from "./Errors";
 
 interface LS_Required_Module extends NodeRequire {
-	register?:((mod:LS_Module)=>void);
+	register:((mod:LS_Module)=>void);
 }
 
 //Internal variables
@@ -34,38 +34,26 @@ export class LS_Module {
 
 		//Load module information
 		fs.readFile(path.join(mod_path, "package.json"), {encoding: "utf-8"}).then(async (raw_package_data: string) =>{
+			let imported_module: LS_Required_Module;
+
 			//Get package.json contents
 			const parsed_package_data = JSON.parse(raw_package_data);
 
 			//Assign data to class
 			this.package_data = parsed_package_data;
 			this.name = this.package_data['name'];
-			//const module_path = path.join(this.base_dir, parsed_package_data.main || "index.js");
-			//console.log(`Required file: ${module_path}`);
-			console.log(global);
 			try {
-				console.log("Attempting to load base_dir");
-				const imported_module = await global.require(this.base_dir);
-				console.log(typeof(imported_module));
+				//console.log("Attempting to load base_dir");
+				imported_module = await import(this.base_dir);
 			} catch(err:unknown) {
 				console.error("Could not load module");
 				console.error(err);
+				throw err;
 			}
-			try {
-				console.log("Attempting to load index.js");
-				const imported_module = await global.require(path.join(this.base_dir, parsed_package_data.main || "index.js"));
-				console.log(typeof(imported_module));
-			} catch(err:unknown) {
-				console.error("Could not load module");
-				console.error(err);
-			}
-		});
 
-		/*
-		this.__req = mod_pkg;
-		this.base_dir = mod_path;
-		this.name = mod_pkg.name as string;
-		*/
+			//Register module
+			imported_module.register(this);
+		});
 	}
 
 	/**

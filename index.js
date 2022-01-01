@@ -1,7 +1,7 @@
-import { app, BrowserWindow, ipcMain } from "electron";
-import * as path from "path";
+const { app, BrowserWindow, ipcMain } = require("electron");
+const path = require("path");
 
-import * as LiveStudio from "./dist/api/LiveStudio";
+const LiveStudio = require("./dist/api/LiveStudio");
 
 function createWindow() {
 	console.log("Creating window...");

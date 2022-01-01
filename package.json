@@ -1,7 +1,6 @@
 {
   "name": "livestudio",
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "ng": "ng",
     "start": "npm run build:api && npm run build && electron .",
