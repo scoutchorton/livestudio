@@ -1,2 +1,13 @@
-src/
 api/
+.*/
+
+#Angular files
+src/
+tsconfig.app.json
+tsconfig.spec.json
+karma.conf.js
+angular.json
+.browserslistrc
+.editorconfig
+index.js
+dist/livestudio

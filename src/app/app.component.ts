@@ -15,6 +15,16 @@ export class AppComponent implements OnInit {
 	title = 'livestudio';
 	loading = true;
 
+	constructor() {
+		ipcRenderer.on('AddStatusbar', e => {
+			console.log('AddStatusbar', e);
+		});
+
+		ipcRenderer.on('RegisterPane', e => {
+			console.log('RegisterPane', e);
+		});
+	}
+
 	async ngOnInit(): Promise<void> {
 		console.log('Initialized AppComponent');
 		console.log('Initializing LiveStudio...');

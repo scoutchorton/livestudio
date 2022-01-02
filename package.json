@@ -1,13 +1,14 @@
 {
   "name": "livestudio",
-  "version": "0.0.0",
+  "version": "0.0.0-alpha.0",
+  "main": "dist/api/LiveStudio.js",
   "scripts": {
     "ng": "ng",
     "start": "npm run build:api && npm run build && electron .",
     "build": "ng build --base-href ./",
     "build:api": "tsc -p tsconfig.api.json",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "prepare": "npm run build:api"
   },
   "private": true,
   "dependencies": {
