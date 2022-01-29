@@ -3,8 +3,9 @@
  */
 
 export class RegistrationError extends Error {
-	constructor(msg:string) {
+	override name = 'RegistrationError';
+
+	constructor(msg?: string) {
 		super(msg);
-		this.name = "RegistrationError";
 	}
 }

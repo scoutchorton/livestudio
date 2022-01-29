@@ -4,8 +4,10 @@
   "main": "dist/api/LiveStudio.js",
   "scripts": {
     "ng": "ng",
-    "start": "npm run build:api && npm run build && electron .",
+    "start": "npm run build:api && npm run build && electron index.js",
+    "start:debug": "npm run build:api && npm run build:debug && electron index.js",
     "build": "ng build --base-href ./",
+    "build:debug": "ng build --base-href ./ --configuration development",
     "build:api": "tsc -p tsconfig.api.json",
     "watch": "ng build --watch --configuration development",
     "prepare": "npm run build:api"

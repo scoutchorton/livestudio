@@ -17,17 +17,20 @@ export class AppComponent implements OnInit {
 
 	constructor() {
 		ipcRenderer.on('AddStatusbar', e => {
-			console.log('AddStatusbar', e);
+			console.log('[AppComponent] AddStatusbar', e);
 		});
 
 		ipcRenderer.on('RegisterPane', e => {
-			console.log('RegisterPane', e);
+			console.log('[AppComponent] RegisterPane', e);
 		});
 	}
 
-	async ngOnInit(): Promise<void> {
-		console.log('Initialized AppComponent');
-		console.log('Initializing LiveStudio...');
-		await ipcRenderer.invoke('PageLoad');
+	ngOnInit(): void {
+		console.log('[AppComponent] [ngOnInit] Initialized AppComponent');
+		console.log('[AppComponent] [ngOnInit] Initializing LiveStudio...');
+		ipcRenderer.invoke('PageLoad').then((res) => {
+			console.log('[AppComponent] [ngOnInit] Done loading!');
+			this.loading = false;
+		});
 	}
 }

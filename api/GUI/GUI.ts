@@ -2,7 +2,7 @@
  * @module LiveStudio/GUI
  */
 
-import { BrowserWindow } from "electron";
+import { BrowserWindow } from 'electron';
 
 /**
  * Register an item in the status bar
@@ -12,15 +12,15 @@ import { BrowserWindow } from "electron";
  * @param {Array} settings.iconURL Items for the context menu
  * @async
  */
-export async function registerStatusbar(settings:Record<string,unknown>):Promise<void> {
-	const win:BrowserWindow = BrowserWindow.getAllWindows()[0];
+export async function registerStatusbar(settings: Record<string,unknown>): Promise<void> {
+	const win: BrowserWindow = BrowserWindow.getAllWindows()[0];
 
 	//Check if a window was found
 	if(win === null)
-		throw Error("Could not get BrowserWindow."); //Move to Internal/Errors
+		throw Error('Could not get BrowserWindow.'); //Move to Internal/Errors
 	
 	console.log(settings, win);
-	win.webContents.send("AddStatusbar", settings);
+	win.webContents.send('AddStatusbar', settings);
 
 	return;
 }
@@ -30,15 +30,15 @@ export async function registerStatusbar(settings:Record<string,unknown>):Promise
  * @param settings Options for pane
  * @async 
  */
-export async function registerPane(settings:Record<string,unknown>):Promise<void> {
-	const win:BrowserWindow = BrowserWindow.getAllWindows()[0];
+export async function registerPane(settings: Record<string,unknown>): Promise<void> {
+	const win: BrowserWindow = BrowserWindow.getAllWindows()[0];
 
 	//Check if a window was found
 	if(win === null)
-		throw Error("Could not get BrowserWindow."); //Move to a new error class
+		throw Error('Could not get BrowserWindow.'); //Move to a new error class
 
 	console.log(settings, win);
-	win.webContents.send("RegisterPane", settings);
+	win.webContents.send('RegisterPane', settings);
 
 	return;
 }

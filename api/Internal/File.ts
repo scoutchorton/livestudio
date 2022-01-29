@@ -2,21 +2,21 @@
  * @module LiveStudio/Internal/File
  */
 
-import { promises as fs } from "fs";
-import * as path from "path";
+import { promises as fs } from 'fs';
+import * as path from 'path';
 
 interface FSError {
-	code:string;
-	errno:number;
-	path:number;
-	syscall:number;
-	message:number;
-	stack:number;
+	code: string;
+	errno: number;
+	path: number;
+	syscall: number;
+	message: number;
+	stack: number;
 }
 
 //Internal variables
-const __home_dir:string = (process.platform == "win32") ? process.env['APPDATA'] as string : process.env['HOME'] as string;
-const __data_dir:string = path.join((__home_dir as string), ".livestudio");
+const __home_dir: string = (process.platform == 'win32') ? process.env['APPDATA'] as string : process.env['HOME'] as string;
+const __data_dir: string = path.join((__home_dir as string), '.livestudio');
 
 /**
  * @member {Object} paths Important directories
@@ -28,11 +28,11 @@ const __data_dir:string = path.join((__home_dir as string), ".livestudio");
 export const paths = {
 	folders: {
 		data: __data_dir,
-		modules: path.join(__data_dir, "node_modules")
+		modules: path.join(__data_dir, 'node_modules')
 	},
 	files: {
-		settings: path.join(__data_dir, "settings.json"),
-		package: path.join(__data_dir, "package.json"),
+		settings: path.join(__data_dir, 'settings.json'),
+		package: path.join(__data_dir, 'package.json'),
 	}
 };
 
@@ -40,15 +40,15 @@ export const paths = {
  * Generate required file and folder structure needed for LiveStudio
  * @async
  */
-export async function generateStructure():Promise<Array<string>> {
-	const generated:Array<string> = [];
+export async function generateStructure(): Promise<Array<string>> {
+	const generated: Array<string> = [];
 
 	//Iterate over needed folders
 	for(const folder of Object.values(paths.folders)) {
 		try {
 			await fs.mkdir(folder);
 			generated.push(folder);
-		} catch(err:unknown) {
+		} catch(err: unknown) {
 			//Ignore if file exists
 			if((err as FSError).code == 'EEXIST')
 				continue
@@ -60,13 +60,13 @@ export async function generateStructure():Promise<Array<string>> {
 
 	//Iterate over needed files
 	for(const file of Object.values(paths.files)) {
-		let fh:fs.FileHandle|undefined = undefined;
-		let fileData:Buffer;
+		let fh: fs.FileHandle | undefined = undefined;
+		let fileData: Buffer;
 
 		//Create file
 		try {
-			fh = await fs.open(file, "a");
-		} catch(err:unknown) {
+			fh = await fs.open(file, 'a');
+		} catch(err: unknown) {
 			console.log(err);
 		} finally {
 			if(fh != undefined)
@@ -79,9 +79,9 @@ export async function generateStructure():Promise<Array<string>> {
 			if(/\.json$/.test(file)) {
 				fileData = await fs.readFile(file);
 				if(fileData.length === 0)
-					await fs.writeFile(file, "{}");
+					await fs.writeFile(file, '{}');
 			}
-		} catch(err:unknown) {
+		} catch(err: unknown) {
 			console.error(`Could not initialize JSON file ${file}`);
 			throw err;
 		}
