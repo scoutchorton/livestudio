@@ -1,7 +1,7 @@
 # LiveStudio
 
 # Installing
-## Installing the Studio
+## Installing the application
 To install the standalone executable, view the releases section of the GitHub page (currently none exist) or install from source.
 ```bash
 git clone https://github.com/scoutchorton/livestudio
