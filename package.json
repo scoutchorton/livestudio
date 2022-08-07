@@ -1,0 +1,18 @@
+{
+  "name": "livestudio",
+  "version": "0.0.0-alpha.0",
+  "description": "To install the standalone executable, view the releases section of the GitHub page (currently none exist) or install from source.\r ```bash\r git clone https://github.com/scoutchorton/livestudio\r npm i\r ```",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scoutchorton/livestudio.git"
+  },
+  "author": "scoutchorton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/scoutchorton/livestudio/issues"
+  },
+  "homepage": "https://github.com/scoutchorton/livestudio#readme"
+}
